@@ -2,8 +2,10 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using System;
+using Unity.VisualScripting;
 
-public class Spell 
+public class Spell
 {
     public float last_cast;
     public SpellCaster owner;
@@ -19,9 +21,10 @@ public class Spell
     public virtual void SetAttributes(JObject attributes)
     {
         // we will parse the attributes here
+
     }
 
-    public virtual GetName()
+    public virtual string GetName()
     {
         return "Bolt";
     }

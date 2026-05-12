@@ -33,6 +33,7 @@ public class GameManager
     public EnemySpriteManager enemySpriteManager;
     public PlayerSpriteManager playerSpriteManager;
     public RelicIconManager relicIconManager;
+    public SpellManager spellManager;
     
     public int total_damage_dealt = 0;
     

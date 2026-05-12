@@ -28,6 +28,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Debug.Log("testing from enemy spawner .cs"); //works
         LoadEnemyType();
         LoadLevelType(); 
         // loop through levels and add a button for each difficulty
