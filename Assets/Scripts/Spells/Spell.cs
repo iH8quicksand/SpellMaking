@@ -14,22 +14,29 @@ public class Spell
         this.owner = owner;
     }
 
-    public string GetName()
+    //instructions said to have a method that gets passed the json data
+    // then the spell can configure itself
+    public virtual void SetAttributes(JObject attributes)
+    {
+        // we will parse the attributes here
+    }
+
+    public virtual GetName()
     {
         return "Bolt";
     }
 
-    public int GetManaCost()
+    public virtual int GetManaCost()
     {
         return 10;
     }
 
-    public int GetDamage()
+    public virtual int GetDamage()
     {
         return 100;
     }
 
-    public float GetCooldown()
+    public virtual float GetCooldown()
     {
         return 0.75f;
     }
@@ -51,7 +58,7 @@ public class Spell
         yield return new WaitForEndOfFrame();
     }
 
-    void OnHit(Hittable other, Vector3 impact)
+    protected virtual void OnHit(Hittable other, Vector3 impact)
     {
         if (other.team != team)
         {
