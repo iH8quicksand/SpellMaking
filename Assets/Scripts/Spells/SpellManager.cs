@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -5,23 +6,18 @@ using UnityEngine;
 
 public class SpellManager : MonoBehaviour
 {
-    private Dictionary<string,Spell> spells;
+    public Dictionary<string,JObject> spells;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        this.spells = new Dictionary<string, Spell>();
+        GameManager.Instance.spellManager = this;
         loadSpellsFromJSON();
-        Debug.Log(this.spells);
-        Debug.Log("hello world!");
     }
 
     private void loadSpellsFromJSON()
     {
         var spellJSON = Resources.Load<TextAsset>("spells");   // this loads the SPELLS from the spell JSON file
-        JToken rawText = JToken.Parse(spellJSON.text);
-        foreach (var spell in rawText)
-        {
-            Spell sp = spell.ToObject<Spell>();
-            this.spells[sp.GetName()] = sp;
-        }
+        spells = JsonConvert.DeserializeObject<Dictionary<string, JObject>>(spellJSON.text); // this deserializes the JSON into the spells dictionary as JObjects
     }
 }

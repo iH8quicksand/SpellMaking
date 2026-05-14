@@ -28,7 +28,6 @@ public class EnemySpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("testing from enemy spawner .cs"); //works
         LoadEnemyType();
         LoadLevelType(); 
         // loop through levels and add a button for each difficulty
@@ -179,7 +178,6 @@ public class EnemySpawner : MonoBehaviour
     
     public void LoadEnemyType()
     {
-        
         var enemytext = Resources.Load<TextAsset>("enemies");   // this loads the enemies files
         JToken jo = JToken.Parse(enemytext.text);
         foreach (var enemy in jo)
@@ -187,7 +185,6 @@ public class EnemySpawner : MonoBehaviour
             Enemy en = enemy.ToObject<Enemy>();
             enemy_types[en.name] = en;
         }
-        
     }
 
     public void LoadLevelType()
