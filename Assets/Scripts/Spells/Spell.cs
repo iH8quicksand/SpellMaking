@@ -23,10 +23,10 @@ public class Spell
     }
 
     //instructions said to have a method that gets passed the json data
-    // then the spell can configure itself
+    // then the spell can configure itself.
+    // THIS IS FOR BASE SPELLS
     public virtual void SetAttributes(JObject attributes)
     {
-        // we will parse the attributes here
 
     }
 
