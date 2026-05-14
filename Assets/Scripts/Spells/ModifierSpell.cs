@@ -6,6 +6,12 @@ public class ModifierSpell : Spell
 {
     protected Spell innerSpell;
 
+    // I'm just a wrapper, so ask the doll inside me!
+    public override Spell GetBaseSpell()
+    {
+        return innerSpell.GetBaseSpell();
+    }
+
     // The constructor takes the spell it is wrapping
     public ModifierSpell(SpellCaster owner, Spell innerSpell) : base(owner)
     {

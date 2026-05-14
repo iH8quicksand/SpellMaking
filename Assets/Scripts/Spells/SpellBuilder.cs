@@ -17,9 +17,9 @@ public class SpellBuilder
         // Create the innermost doll
         Spell mySpell = new Spell(owner); 
         
-        // Wrap the base spell in our test modifier
-        // we are calling the TestDoubleDamageModifier's constructor
-        mySpell = new TestDoubleDamageModifier(owner, mySpell);
+        // add a valuemodifier to the list field in the spell
+        mySpell = new ManaModifierSpell(owner, mySpell, "Cheap", ValueModifier.ModifierType.Multiply, 0.1f);
+        mySpell = new DamageModifierSpell(owner, mySpell, "killer", ValueModifier.ModifierType.Multiply, 9f);
         
         return mySpell;
     }
