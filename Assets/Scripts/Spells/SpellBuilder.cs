@@ -21,9 +21,6 @@ public class SpellBuilder
         // we are calling the TestDoubleDamageModifier's constructor
         mySpell = new TestDoubleDamageModifier(owner, mySpell);
         
-        // 3. BONUS TEST: Wrap it AGAIN to prove the nesting dolls can chain infinitely!
-        mySpell = new TestDoubleDamageModifier(owner, mySpell); 
-
         return mySpell;
     }
 

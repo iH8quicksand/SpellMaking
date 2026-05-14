@@ -7,6 +7,8 @@ using Unity.VisualScripting;
 
 public class Spell
 {
+    // Create the list to hold the modifiers
+    public List<ValueModifier> damageModifiers = new List<ValueModifier>();
     public float last_cast;
     public SpellCaster owner;
     public Hittable.Team team;
@@ -36,7 +38,12 @@ public class Spell
 
     public virtual int GetDamage()
     {
-        return 100;
+        float baseDamage = 100f; // Later, this will come from your JSON!
+        
+        // Apply all the sticky notes to the base damage
+        float modifiedDamage = ValueModifier.Apply(baseDamage, damageModifiers);
+        
+        return Mathf.RoundToInt(modifiedDamage);
     }
 
     public virtual float GetCooldown()
