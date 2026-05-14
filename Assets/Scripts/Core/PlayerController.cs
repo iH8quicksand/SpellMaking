@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.IO;
 using System.Collections.Generic;
+using static RPNEvaluator.RPNEvaluator;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,17 +31,29 @@ public class PlayerController : MonoBehaviour
 
     public void StartLevel()
     {
-        spellcaster = new SpellCaster(125, 8, Hittable.Team.PLAYER);
+        spellcaster = new SpellCaster(125, 8, 10, Hittable.Team.PLAYER);
         StartCoroutine(spellcaster.ManaRegeneration());
         
         hp = new Hittable(100, Hittable.Team.PLAYER, gameObject);
         hp.OnDeath += Die;
         hp.team = Hittable.Team.PLAYER;
 
+        updatePlayerStats(1);
+
         // tell UI elements what to show
         healthui.SetHealth(hp);
         manaui.SetSpellCaster(spellcaster);
         spellui.SetSpell(spellcaster.spell);
+    }
+
+    public void updatePlayerStats(int wave)
+    {
+        Dictionary<string,int> RPNDict = new Dictionary<string, int> { { "wave", wave } };
+        hp.SetMaxHP(Evaluate("95 wave 5 * +", RPNDict));
+        spellcaster.max_mana = Evaluate("90 wave 10 * +", RPNDict);
+        spellcaster.mana_reg = Evaluate("10 wave +", RPNDict);
+        spellcaster.spell_power = Evaluate("wave 10 *", RPNDict);
+        speed = 5;
     }
 
     // Update is called once per frame

@@ -65,9 +65,10 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnWave()); // I feel like we should pass the levelname to SpawnWave()
     }
 
-    public void NextWave()
+    public void NextWave() // Executed when Next Wave button pressed
     {
         wave_count++;
+        GameManager.Instance.player.GetComponent<PlayerController>().updatePlayerStats(wave_count);
         StartCoroutine(SpawnWave());
     }
     
