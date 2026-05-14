@@ -5,6 +5,7 @@ using System.Linq;
 
 public class SpellCaster 
 {
+    public Transform transform; // so doublerModifier can get players location
     public int mana;
     public int max_mana;
     public int mana_reg;

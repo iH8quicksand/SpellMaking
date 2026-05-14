@@ -20,9 +20,23 @@ public class DoublerModifier : ModifierSpell
 
     public override IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team)
     {
+        // 1. Fire the first shot normally
         yield return innerSpell.Cast(where, target, team);
-        yield return new WaitForSeconds(delay); // 2. Fixed the float by using the variable!
-        yield return innerSpell.Cast(where, target, team);
+        
+        // 2. Wait for the delay
+        yield return new WaitForSeconds(delay);
+        
+        // 3. Figure out the direction they originally aimed
+        Vector3 direction = target - where; 
+        
+        // 4. Get the LIVE position of the player right now
+        Vector3 newWhere = owner.transform.position; 
+        
+        // 5. Apply the original aim direction to the new position
+        Vector3 newTarget = newWhere + direction;
+        
+        // 6. Fire the delayed shot from the updated position!
+        yield return innerSpell.Cast(newWhere, newTarget, team);
     }
 
     public override string GetName()

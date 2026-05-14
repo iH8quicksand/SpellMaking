@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public void StartLevel()
     {
         spellcaster = new SpellCaster(125, 8, 10, Hittable.Team.PLAYER);
+        spellcaster.transform = this.transform;
         StartCoroutine(spellcaster.ManaRegeneration());
         
         hp = new Hittable(100, Hittable.Team.PLAYER, gameObject);
