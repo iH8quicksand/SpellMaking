@@ -12,6 +12,7 @@ public class Spell
     public List<ValueModifier> damageModifiers = new List<ValueModifier>();
     public List<ValueModifier> manaModifiers = new List<ValueModifier>();
     public List<ValueModifier> cooldownModifiers = new List<ValueModifier>();
+    public List<ValueModifier> speedModifiers = new List<ValueModifier>();
 
     public float last_cast;
     public SpellCaster owner;
@@ -57,6 +58,13 @@ public class Spell
         float modifiedCoolDown = ValueModifier.Apply(baseCoolDown, cooldownModifiers);
         return Mathf.RoundToInt(modifiedCoolDown);
     }
+
+    public virtual float GetSpeed()
+    {
+        float baseSpeed = 15f;// these base values should come from the JSON!!!
+        float modifiedSpeed = ValueModifier.Apply(baseSpeed, speedModifiers);
+        return modifiedSpeed;
+    }
     // ------------------------------------------------------------------------------
 
     // If I am asked for the base spell, it's just me!
@@ -78,8 +86,13 @@ public class Spell
     public virtual IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team)
     {
         this.team = team;
-        GameManager.Instance.projectileManager.CreateProjectile(0, "straight", where, target - where, 15f, OnHit);
+        GameManager.Instance.projectileManager.CreateProjectile(0, GetTrajectory(), where, target - where, GetSpeed(), OnHit);
         yield return new WaitForEndOfFrame();
+    }
+
+    public virtual string GetTrajectory()
+    {
+        return "straight";
     }
 
     protected virtual void OnHit(Hittable other, Vector3 impact)

@@ -76,6 +76,12 @@
        "damage_multiplier": "0.75",
        "mana_adder": "10",
        "projectile_trajectory": "homing"
+   },
+   "rapid_fire": {
+       "name": "rapid",
+       "description": "Reduced cooldown at the cost of increased mana.",
+       "cooldown_multiplier": "0.5",
+       "mana_multiplier": "1.25"
    }
 
 }

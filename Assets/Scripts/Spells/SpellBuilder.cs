@@ -66,7 +66,23 @@ public class SpellBuilder
                     mySpell = new ManaModifierSpell(owner, mySpell, prefix, ValueModifier.ModifierType.Multiply, manaMult);
                     break;
 
-                // Add more cases here for speed_amp, chaos, homing, etc.!
+                case "speed_amp":
+                    float spdMult = (float)modJson["speed_multiplier"];
+                    mySpell = new SpeedModifierSpell(owner, mySpell, prefix, ValueModifier.ModifierType.Multiply, spdMult);
+                    break;
+
+                case "rapid_fire":
+                    float cdMult = (float)modJson["cooldown_multiplier"];
+                    mySpell = new CoolDownModifierSpell(owner, mySpell, prefix, ValueModifier.ModifierType.Multiply, cdMult);
+                    float rfManaMult = (float)modJson["mana_multiplier"];
+                    mySpell = new ManaModifierSpell(owner, mySpell, prefix, ValueModifier.ModifierType.Multiply, rfManaMult);
+                    break;
+
+                case "homing":
+                    float homingDmgMult = (float)modJson["damage_multiplier"];
+                    float homingManaAdd = (float)modJson["mana_adder"];
+                    mySpell = new HomingModifierSpell(owner, mySpell, prefix, homingDmgMult, homingManaAdd);
+                    break;
             }
         }
 

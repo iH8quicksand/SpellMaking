@@ -23,6 +23,8 @@ public class ModifierSpell : Spell
     public override int GetDamage() => innerSpell.GetDamage();
     public override float GetCooldown() => innerSpell.GetCooldown();
     public override int GetIcon() => innerSpell.GetIcon();
+    public override float GetSpeed() => innerSpell.GetSpeed();
+    public override string GetTrajectory() => innerSpell.GetTrajectory();
 
     // Pass the cast down to the inner spell by default
     public override IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team)
