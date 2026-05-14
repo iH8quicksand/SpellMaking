@@ -22,12 +22,12 @@ public class EnemySpawner : MonoBehaviour
     Dictionary<string, Enemy> enemy_types = new Dictionary<string, Enemy>(); 
     Dictionary<string, Level> level_types = new Dictionary<string, Level>(); 
     public string currentLevelname;
-    private int wave_count;
     public int delay = 2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        GameManager.Instance.enemySpawner = this;
         LoadEnemyType();
         LoadLevelType(); 
         // loop through levels and add a button for each difficulty
@@ -54,7 +54,6 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartLevel(string levelname)
     {
-        wave_count = 1;
         currentLevelname = levelname;
         
         level_selector.gameObject.SetActive(false);
@@ -62,45 +61,36 @@ public class EnemySpawner : MonoBehaviour
         GameManager.Instance.player.GetComponent<PlayerController>().StartLevel();
         Debug.Log($"Starting level: {currentLevelname}");
         
-        StartCoroutine(SpawnWave()); // I feel like we should pass the levelname to SpawnWave()
+        StartCoroutine(SpawnWave());
     }
 
-    public void NextWave() // Executed when Next Wave button pressed
+    public void NextWave()
     {
-        wave_count++;
-        GameManager.Instance.player.GetComponent<PlayerController>().updatePlayerStats(wave_count);
         StartCoroutine(SpawnWave());
     }
     
     IEnumerator SpawnWave()
     {
-        GameManager.Instance.state = GameManager.GameState.COUNTDOWN; // This is for countdown till the next wave
-        GameManager.Instance.countdown = 3;
-        for (int i = 3; i > 0; i--)
-        {
-            yield return new WaitForSeconds(1);
-            GameManager.Instance.countdown--;
-        }
-        GameManager.Instance.state = GameManager.GameState.INWAVE;
-        
         Level currentLevel = level_types[currentLevelname];         // sets the current level type
         for (int i = 0; i < currentLevel.spawns.Count; i++)                // this spawns the stuff 
         {
             
             Spawn spawn = currentLevel.spawns[i];
             Enemy enemy_data = enemy_types[spawn.enemy];
-            
+
+            Dictionary<string, int> RPNDict = new Dictionary<string, int> { { "base", enemy_data.hp }, { "wave", GameManager.Instance.wave } };
             SetPerameters parameters =  new SetPerameters // saves the parameters to the builder class to get later.
             {
+                
                 type = spawn.enemy,
-                hp = Evaluate(spawn.hp, new Dictionary<string, int> {{ "base", enemy_data.hp }, { "wave", wave_count }}),
-                damage = Evaluate(spawn.damage ?? "base" , new Dictionary<string, int> {{ "base", enemy_data.damage }, { "wave", wave_count }}),
-                speed = Evaluate(enemy_data.speed.ToString(), new Dictionary<string, int>{{ "base", enemy_data.speed }, { "wave", wave_count }}),
+                hp = Evaluate(spawn.hp, RPNDict),
+                damage = Evaluate(spawn.damage ?? "base" , RPNDict),
+                speed = Evaluate(enemy_data.speed.ToString(), RPNDict),
                 delay = currentLevel.spawns[i].delay,
                 location = currentLevel.spawns[i].location,
                 
             };
-            int count = Evaluate(spawn.count, new Dictionary<string, int> { { "wave", wave_count } });
+            int count = Evaluate(spawn.count, RPNDict);
             if (count <= 0) count = 1;
 
             // fallback to spawning 1 at a time
@@ -134,7 +124,7 @@ public class EnemySpawner : MonoBehaviour
 
         }
         yield return new WaitWhile(() => GameManager.Instance.enemy_count > 0);
-        GameManager.Instance.state = GameManager.GameState.WAVEEND;
+        GameManager.Instance.RoundOver();
     }
 
     void SpawnEnemy(SetPerameters parameters)                                // going to need to add the other perimeters like 

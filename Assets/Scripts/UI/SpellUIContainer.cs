@@ -8,18 +8,39 @@ public class SpellUIContainer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // we only have one spell (right now)
+        GameManager.Instance.spellUIContainer = this;
         spellUIs[0].SetActive(true);
-        for(int i = 1; i< spellUIs.Length; ++i)
+        for (int i = 1; i < spellUIs.Length; ++i)
         {
             spellUIs[i].SetActive(false);
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    public void UpdateUIs()
     {
-        
+        SpellCaster spellCaster = GameManager.Instance.playerController.spellcaster;
+        for (int i = 0; i < spellUIs.Length; ++i)
+        {
+            spellUIs[i].SetActive(false);
+        }
+        for (int i = 0; i < Mathf.Min(spellCaster.spells.Count, spellUIs.Length); ++i)
+        {
+            spellUIs[i].SetActive(true);
+        }
+    }
+
+    public void showDropButtons()
+    {
+        foreach (GameObject spellUI in spellUIs)
+        {
+            spellUI.GetComponent<SpellUI>().dropbutton.SetActive(true);
+        }
+    }
+    public void hideDropButtons()
+    {
+        foreach (GameObject spellUI in spellUIs)
+        {
+            spellUI.GetComponent<SpellUI>().dropbutton.SetActive(false);
+        }
     }
 
 }

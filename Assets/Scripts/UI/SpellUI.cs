@@ -49,4 +49,9 @@ public class SpellUI : MonoBehaviour
         }
         cooldown.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 48 * perc);
     }
+
+    public void dropSpell()
+    {
+
+    }
 }

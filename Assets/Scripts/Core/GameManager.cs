@@ -1,10 +1,11 @@
-using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager 
+public class GameManager
 {
     public enum GameState
     {
@@ -34,7 +35,12 @@ public class GameManager
     public PlayerSpriteManager playerSpriteManager;
     public RelicIconManager relicIconManager;
     public SpellManager spellManager;
-    
+    public RewardScreenManager rewardScreenManager;
+    public EnemySpawner enemySpawner;
+    public SpellUIContainer spellUIContainer;
+    public PlayerController playerController;
+
+    public int wave = 1;
     public int total_damage_dealt = 0;
     
     private List<GameObject> enemies;
@@ -72,5 +78,32 @@ public class GameManager
     {
         enemies = new List<GameObject>();
     }
-    
+
+    public void RoundOver()
+    {
+        state = GameState.WAVEEND;
+        wave++;
+        player.GetComponent<PlayerController>().updatePlayerStats(wave);
+        rewardScreenManager.Show();
+    }
+    public void StartCountdown()
+    {
+        CoroutineManager.Instance.Run(Countdown());
+    }
+    public void NextRound()
+    {
+        enemySpawner.NextWave();
+    }
+    IEnumerator Countdown()
+    {
+        state = GameState.COUNTDOWN; // This is for countdown till the next wave
+        countdown = 3;
+        for (int i = 3; i > 0; i--)
+        {
+            yield return new WaitForSeconds(1);
+            countdown--;
+        }
+        state = GameState.INWAVE;
+        NextRound();
+    }
 }

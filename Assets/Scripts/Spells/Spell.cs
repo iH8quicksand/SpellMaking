@@ -35,6 +35,11 @@ public class Spell
         return "Bolt";
     }
 
+    public virtual string GetDescription()
+    {
+        return "A straight-flying bolt.";
+    }
+
     // STATS THAT GET CHANGED BY MODIFIERS ---------------------------------------
     public virtual int GetManaCost()
     {

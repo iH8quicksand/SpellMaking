@@ -19,6 +19,7 @@ public class ModifierSpell : Spell
     }
 
     public override string GetName() => innerSpell.GetName();
+    public override string GetDescription() => innerSpell.GetDescription();
     public override int GetManaCost() => innerSpell.GetManaCost();
     public override int GetDamage() => innerSpell.GetDamage();
     public override float GetCooldown() => innerSpell.GetCooldown();
