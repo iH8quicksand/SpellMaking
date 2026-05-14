@@ -24,6 +24,14 @@ public class SpellBuilder
         return mySpell;
     }
 
+    // this is what should get called at the start of the game to give the player
+    // Arcane Bolt (or whatever spell is first in the JSON)
+    public Spell BuildSpecificSpell(SpellCaster owner , string spellName)
+    {
+        Spell mySpell = new Spell(owner); 
+        return mySpell;
+    }
+
    
     public SpellBuilder()
     {        
