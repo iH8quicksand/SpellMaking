@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class SpellCaster 
 {
@@ -9,7 +10,7 @@ public class SpellCaster
     public int mana_reg;
     public int spell_power;
     public Hittable.Team team;
-    public Spell spell;
+    public List<Spell> spell;
 
     public IEnumerator ManaRegeneration()
     {
@@ -28,7 +29,7 @@ public class SpellCaster
         this.mana_reg = mana_reg;
         this.spell_power = spell_power;
         this.team = team;
-        spell = new SpellBuilder().Build(this);
+        spell.Append(new SpellBuilder().Build(this));
     }
 
     public IEnumerator Cast(Vector3 where, Vector3 target)
