@@ -18,7 +18,7 @@ public class SpellManager : MonoBehaviour
     public Dictionary<string,JObject> modifierSpells;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         GameManager.Instance.spellManager = this;
         loadSpellsFromJSON();

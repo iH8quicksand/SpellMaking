@@ -27,10 +27,7 @@ public class PlayerController : MonoBehaviour
     {
         unit = GetComponent<Unit>();
         GameManager.Instance.player = gameObject;
-    }
-
-    public void StartLevel()
-    {
+        
         spellcaster = new SpellCaster(125, 8, 10, Hittable.Team.PLAYER);
         spellcaster.transform = this.transform;
         StartCoroutine(spellcaster.ManaRegeneration());
@@ -39,12 +36,15 @@ public class PlayerController : MonoBehaviour
         hp.OnDeath += Die;
         hp.team = Hittable.Team.PLAYER;
 
-        updatePlayerStats(1);
-
         // tell UI elements what to show
         healthui.SetHealth(hp);
         manaui.SetSpellCaster(spellcaster);
         spellui.SetSpell(spellcaster.spells[0]);
+    }
+
+    public void StartLevel()
+    {
+        updatePlayerStats(1);
     }
 
     public void updatePlayerStats(int wave)
