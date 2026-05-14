@@ -11,6 +11,7 @@ public class SpellCaster
     public int spell_power;
     public Hittable.Team team;
     public List<Spell> spell;
+    private int equippedSpellIndex;
 
     public IEnumerator ManaRegeneration()
     {
@@ -30,14 +31,15 @@ public class SpellCaster
         this.spell_power = spell_power;
         this.team = team;
         spell.Append(new SpellBuilder().Build(this));
+        equippedSpellIndex = 0;
     }
 
     public IEnumerator Cast(Vector3 where, Vector3 target)
     {        
-        if (mana >= spell.GetManaCost() && spell.IsReady())
+        if (mana >= spell[equippedSpellIndex].GetManaCost() && spell[equippedSpellIndex].IsReady())
         {
-            mana -= spell.GetManaCost();
-            yield return spell.Cast(where, target, team);
+            mana -= spell[equippedSpellIndex].GetManaCost();
+            yield return spell[equippedSpellIndex].Cast(where, target, team);
         }
         yield break;
     }
