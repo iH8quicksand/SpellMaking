@@ -32,8 +32,19 @@ public class SpellCaster
         this.spell_power = spell_power;
         this.team = team;
         spells = new List<Spell>();
-        spells.Add(new SpellBuilder().Build(this));
+        spells.Add(GenerateRandomSpell());
         equippedSpellIndex = 0;
+        EventBus.Instance.AddSpell += AddSpell;
+    }
+
+    public Spell GenerateRandomSpell()
+    {
+        return new SpellBuilder().Build(this);
+    }
+
+    public void AddSpell(Spell newSpell)
+    {
+        spells.Add(newSpell);
     }
 
     public IEnumerator Cast(Vector3 where, Vector3 target)

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Runtime.CompilerServices;
 
 public class EventBus 
 {
@@ -15,10 +16,25 @@ public class EventBus
     }
 
     public event Action<Vector3, Damage, Hittable> OnDamage;
+    public event Action WaveEnd;
+    public event Action WaveStart;
+    public event Action<Spell> AddSpell;
     
     public void DoDamage(Vector3 where, Damage dmg, Hittable target)
     {
         OnDamage?.Invoke(where, dmg, target);
+    }
+    public void Broadcast_WaveEnd()
+    {
+        WaveEnd?.Invoke();
+    }
+    public void Broadcast_WaveStart()
+    {
+        WaveStart?.Invoke();
+    }
+    public void Broadcast_AddSpell(Spell newSpell)
+    {
+        AddSpell?.Invoke(newSpell);
     }
 
 }

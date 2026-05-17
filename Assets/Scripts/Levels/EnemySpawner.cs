@@ -69,6 +69,7 @@ public class EnemySpawner : MonoBehaviour
     {
         wave_count++;
         GameManager.Instance.player.GetComponent<PlayerController>().updatePlayerStats(wave_count);
+        EventBus.Instance.Broadcast_WaveStart(); //Currently used just to close reward screen, but should be used more!
         StartCoroutine(SpawnWave());
     }
     
@@ -135,6 +136,7 @@ public class EnemySpawner : MonoBehaviour
         }
         yield return new WaitWhile(() => GameManager.Instance.enemy_count > 0);
         GameManager.Instance.state = GameManager.GameState.WAVEEND;
+        EventBus.Instance.Broadcast_WaveEnd();
     }
 
     void SpawnEnemy(SetPerameters parameters)                                // going to need to add the other perimeters like 
