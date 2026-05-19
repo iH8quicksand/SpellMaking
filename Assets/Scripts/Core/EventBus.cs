@@ -20,6 +20,7 @@ public class EventBus
     public event Action WaveStart;
     public event Action<Spell> AddSpell;
     public event Action<int> SetSpell;
+    public event Action<int> RemoveSpell;
     
     public void DoDamage(Vector3 where, Damage dmg, Hittable target)
     {
@@ -40,6 +41,10 @@ public class EventBus
     public void Broadcast_SetSpell(int index)
     {
         SetSpell?.Invoke(index);
+    }
+    public void Broadcast_RemoveSpell(int index)
+    {
+        RemoveSpell?.Invoke(index);
     }
 
 }

@@ -10,6 +10,9 @@ using UnityEngine;
  *          so that SpellBuilder can access the base spells and modifier spells
  *          needed to give the player new spells at the end of each wave.
  *          
+ *          Also, bridge the spell buttons in unity to the codebase. For example:
+ *          Setting active spell, dropping a spell.
+ *          
  * Usage: GameManager.Instance.spellManager.baseSpells/modifierSpells...
 */
 public class SpellManager : MonoBehaviour
@@ -54,5 +57,9 @@ public class SpellManager : MonoBehaviour
     public void setSpell(int index)
     {
         EventBus.Instance.Broadcast_SetSpell(index);
+    }
+    public void removeSpell(int index)
+    {
+        EventBus.Instance.Broadcast_RemoveSpell(index);
     }
 }

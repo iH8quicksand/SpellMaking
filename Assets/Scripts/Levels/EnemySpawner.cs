@@ -215,4 +215,9 @@ public class EnemySpawner : MonoBehaviour
         GameManager.Instance.ResetEnemyCount();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void DEBUG_FinishWave()
+    {
+        EventBus.Instance.Broadcast_WaveEnd();
+    }
 }

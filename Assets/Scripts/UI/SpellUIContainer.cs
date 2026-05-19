@@ -15,12 +15,8 @@ public class SpellUIContainer : MonoBehaviour
             spellUIs[i].SetActive(false);
         }
         EventBus.Instance.AddSpell += AddSpell;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        EventBus.Instance.RemoveSpell += RemoveSpell;
+        EventBus.Instance.WaveStart += hideDropButtons;
     }
 
     public void showDropButtons()
@@ -43,12 +39,22 @@ public class SpellUIContainer : MonoBehaviour
         int freeIndex = 0;
         while (freeIndex < spellUIs.Length)
         {
-            if (spellUIs[freeIndex].activeSelf == false) break;
+            if (spellUIs[freeIndex].activeSelf == false) break; //if the slot at freeIndex is inactive, break (freeIndex found)
             freeIndex++;
         }
         //Next, activate the spell UI and set its spell
+        Debug.Log("Free index found: " + freeIndex + ". (spellUIs.Length = " + spellUIs.Length);
         spellUIs[freeIndex].GetComponent<SpellUI>().SetSpell(newSpell);
         spellUIs[freeIndex].SetActive(true);
+    }
+    public void RemoveSpell(int index)
+    {
+        spellUIs[3].SetActive(false);
+        for (int i=0; i<spellUIs.Length-1; i++)
+        {
+            spellUIs[i].GetComponent<SpellUI>().SetSpell(GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.spells[i]);
+        }
+        hideDropButtons();
     }
 
 }

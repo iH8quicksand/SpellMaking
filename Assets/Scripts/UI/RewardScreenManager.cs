@@ -54,4 +54,13 @@ public class RewardScreenManager : MonoBehaviour
             GameManager.Instance.player.GetComponentInChildren<EnemySpawner>().NextWave();
         }
     }
+
+    public void DEBUG_GetRandomSpell()
+    {
+        offeredSpell = GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.GenerateRandomSpell();
+        if (GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.spells.Count < 4)
+        {
+            EventBus.Instance.Broadcast_AddSpell(offeredSpell);
+        }
+    }
 }

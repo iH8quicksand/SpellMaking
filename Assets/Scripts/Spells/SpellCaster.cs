@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 
 public class SpellCaster 
 {
@@ -36,6 +37,7 @@ public class SpellCaster
         equippedSpellIndex = 0;
         EventBus.Instance.AddSpell += AddSpell;
         EventBus.Instance.SetSpell += SetSpell;
+        EventBus.Instance.RemoveSpell += RemoveSpell;
     }
 
     public Spell GenerateRandomSpell()
@@ -46,6 +48,10 @@ public class SpellCaster
     public void AddSpell(Spell newSpell)
     {
         spells.Add(newSpell);
+    }
+    public void RemoveSpell(int index)
+    {
+        spells.RemoveAt(index);
     }
 
     public IEnumerator Cast(Vector3 where, Vector3 target)
