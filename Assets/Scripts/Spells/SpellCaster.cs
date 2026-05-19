@@ -35,6 +35,7 @@ public class SpellCaster
         spells.Add(GenerateRandomSpell());
         equippedSpellIndex = 0;
         EventBus.Instance.AddSpell += AddSpell;
+        EventBus.Instance.SetSpell += SetSpell;
     }
 
     public Spell GenerateRandomSpell()
@@ -55,6 +56,11 @@ public class SpellCaster
             yield return spells[equippedSpellIndex].Cast(where, target, team);
         }
         yield break;
+    }
+
+    private void SetSpell(int index)
+    {
+        equippedSpellIndex = index;
     }
 
 }

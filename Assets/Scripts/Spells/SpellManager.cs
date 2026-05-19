@@ -50,4 +50,9 @@ public class SpellManager : MonoBehaviour
             }
         }
     }
+
+    public void setSpell(int index)
+    {
+        EventBus.Instance.Broadcast_SetSpell(index);
+    }
 }
