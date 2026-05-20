@@ -1,10 +1,11 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.IO;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
-using System.IO;
-using System.Collections.Generic;
 using static RPNEvaluator.RPNEvaluator;
 
 public class PlayerController : MonoBehaviour
@@ -22,12 +23,14 @@ public class PlayerController : MonoBehaviour
     
     public bool dead = false;
 
+    private PlayerClass playerClass;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         unit = GetComponent<Unit>();
         GameManager.Instance.player = gameObject;
-        
+
         spellcaster = new SpellCaster(125, 8, 10, Hittable.Team.PLAYER);
         spellcaster.transform = this.transform;
         StartCoroutine(spellcaster.ManaRegeneration());
@@ -44,17 +47,22 @@ public class PlayerController : MonoBehaviour
 
     public void StartLevel()
     {
-        updatePlayerStats(1);
+        UpdatePlayerStats(1);
     }
 
-    public void updatePlayerStats(int wave)
+    public void UpdatePlayerClass(PlayerClass pc)
+    {
+        playerClass = pc;
+    }
+
+    public void UpdatePlayerStats(int wave)
     {
         Dictionary<string,int> RPNDict = new Dictionary<string, int> { { "wave", wave } };
-        hp.SetMaxHP(Evaluate("95 wave 5 * +", RPNDict));
-        spellcaster.max_mana = Evaluate("90 wave 10 * +", RPNDict);
-        spellcaster.mana_reg = Evaluate("10 wave +", RPNDict);
-        spellcaster.spell_power = Evaluate("wave 10 *", RPNDict);
-        speed = 5;
+        hp.SetMaxHP(Evaluate(playerClass.health, RPNDict));
+        spellcaster.max_mana = Evaluate(playerClass.mana, RPNDict);
+        spellcaster.mana_reg = Evaluate(playerClass.mana_regeneration, RPNDict);
+        spellcaster.spell_power = Evaluate(playerClass.spellpower, RPNDict);
+        speed = Evaluate(playerClass.speed, RPNDict);
     }
 
     // Update is called once per frame

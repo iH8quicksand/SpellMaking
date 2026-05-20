@@ -16,11 +16,14 @@ using UnityEngine.SceneManagement;
 public class EnemySpawner : MonoBehaviour
 {
     public Image level_selector;
+    public Image class_selector;
     public GameObject button;
+    public GameObject playerClassPrefab;
     public GameObject enemy;
     public SpawnPoint[] SpawnPoints; 
     Dictionary<string, Enemy> enemy_types = new Dictionary<string, Enemy>(); 
     Dictionary<string, Level> level_types = new Dictionary<string, Level>(); 
+    Dictionary<string, PlayerClass> class_types = new Dictionary<string, PlayerClass>(); 
     public string currentLevelname;
     private int wave_count;
     public int delay = 2;
@@ -44,6 +47,22 @@ public class EnemySpawner : MonoBehaviour
             selector.GetComponent<MenuSelectorController>().SetLevel(kvp.Key);
             currentY -= spacing;
         }
+
+        
+        LoadClassTypes();
+        int totalClasses = class_types.Count;
+        float spacingX = 200f;
+        float startX = -((totalClasses - 1) * spacingX) / 2f;
+        float currentX = startX;
+        foreach (var kvp in class_types)
+        {
+            GameObject selector = Instantiate(playerClassPrefab, class_selector.transform);
+            selector.transform.localPosition = new Vector3(currentX, -145, 0);
+            selector.GetComponent<ClassSelectorController>().spawner = this;
+            selector.GetComponent<ClassSelectorController>().SetClass(kvp.Key, kvp.Value);
+            currentX += spacingX;
+        }
+
     }
 
     // Update is called once per frame
@@ -52,23 +71,31 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-    public void StartLevel(string levelname)
+    public void SelectLevel(string levelname)
     {
         wave_count = 1;
         currentLevelname = levelname;
         
         level_selector.gameObject.SetActive(false);
+        class_selector.gameObject.SetActive(true);
+    }
+
+    public void StartLevel(PlayerClass playerClass)
+    {
+        class_selector.gameObject.SetActive(false);
+        GameManager.Instance.player.GetComponent<PlayerController>().UpdatePlayerClass(playerClass);
+        GameManager.Instance.player.GetComponent<PlayerController>().UpdatePlayerStats(1);
         // this is not nice: we should not have to be required to tell the player directly that the level is starting
         GameManager.Instance.player.GetComponent<PlayerController>().StartLevel();
         Debug.Log($"Starting level: {currentLevelname}");
-        
+
         StartCoroutine(SpawnWave()); // I feel like we should pass the levelname to SpawnWave()
     }
 
     public void NextWave() // Executed when Next Wave button pressed
     {
         wave_count++;
-        GameManager.Instance.player.GetComponent<PlayerController>().updatePlayerStats(wave_count);
+        GameManager.Instance.player.GetComponent<PlayerController>().UpdatePlayerStats(wave_count);
         EventBus.Instance.Broadcast_WaveStart(); //Currently used just to close reward screen, but should be used more!
         StartCoroutine(SpawnWave());
     }
@@ -207,7 +234,23 @@ public class EnemySpawner : MonoBehaviour
             
         }
     }
-    
+
+    private void LoadClassTypes()
+    {
+        var classesJSON = Resources.Load<TextAsset>("classes");
+        class_types = JsonConvert.DeserializeObject<Dictionary<string, PlayerClass>>(classesJSON.text);
+        //foreach (var (key, value) in class_types) //Just prints the contents of class_types
+        //{
+        //    Debug.Log("name: " + key);
+        //    Debug.Log("sprite: " + value.sprite);
+        //    Debug.Log("health: " + value.health);
+        //    Debug.Log("mana: " + value.mana);
+        //    Debug.Log("mana_regeneration: " + value.mana_regeneration);
+        //    Debug.Log("spellpower: " + value.spellpower);
+        //    Debug.Log("speed: " + value.speed);
+        //}
+    }
+
     public void RestartLevel()
     {
         GameManager.Instance.state = GameManager.GameState.PREGAME;
