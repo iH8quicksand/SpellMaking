@@ -2,11 +2,66 @@ using UnityEngine;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 
-public class RelicManager // should this be Monobehavior?
+/*
+ * Currently supported triggers:
+ *  take-damage, stand-still, move, cast-spell, on-kill
+ * Currently supported effects:
+ *  gain-mana, gain-spellpower, gain-health
+ */
+public class RelicManager : MonoBehaviour
 {
-    public Dictionary<string,JObject> relics;
-    //read the json and put relics in dictionary (name, jObj)
+    private List<Relic> relicPool;
+    private void Start()
+    {
+        LoadRelics();
+    }
+    public void LoadRelics()
+    {
+        var relicsJSON = Resources.Load<TextAsset>("relics");
+        relicPool = JsonConvert.DeserializeObject<List<Relic>>(relicsJSON.text);
+    }
+    public Relic GetRelic()
+    {
+        if (relicPool.Count == 0) return null;
+        int index = Math.Min(4,(int)(UnityEngine.Random.value * relicPool.Count));
+        Relic relic = relicPool[index];
+        relicPool.RemoveAt(index);
+        return relic;
+    }
+    public Relic ConstructNewRandomRelic()
+    {
+        //Just a fun thing for future, not necessary to implement anytime soon.
+        throw new NotImplementedException();
+    }
+    public void ActivateRelic(Relic relic)
+    {
+        EventBus eb = EventBus.Instance;
+        //Register trigger as subscriber to its event
+        switch(relic.trigger.type)
+        {
+            case "take-damage":
+                eb.OnDamage += (_,_,_) => relic.OnTrigger();//subscribes to onDamage while discarding its parameters
+                break;
+            case "stand-still":
+                eb.StandingStill += relic.OnTrigger;
+                break;
+            case "on-kill":
+                eb.OnKill += relic.OnTrigger;
+                break;
+        }
+        //Register effect "until"s as subscribers to their events
+        switch(relic.effect.until)
+        {
+            case "move":
+                eb.OnMove += relic.effect.ReadyUp;
+                break;
+            case "cast-spell":
+                eb.OnCastSpell += relic.effect.ReadyUp;
+                break;
+        }
+    }
 
     // create all relics and put them in a list that is a private field of this class
     // 

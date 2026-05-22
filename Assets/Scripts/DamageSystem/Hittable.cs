@@ -1,5 +1,6 @@
-using UnityEngine;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Hittable
 {
@@ -39,5 +40,11 @@ public class Hittable
         float perc = this.hp * 1.0f / this.max_hp;
         this.max_hp = max_hp;
         this.hp = Mathf.RoundToInt(perc * max_hp);
+    }
+    public void GainHP(string rpn_hpGained)
+    {
+        Dictionary<string, int> rpnDict = new Dictionary<string, int> { { "wave", GameManager.Instance.GetWave() } };
+        hp += RPNEvaluator.RPNEvaluator.Evaluate(rpn_hpGained, rpnDict);
+        hp = Math.Min(hp, max_hp);
     }
 }

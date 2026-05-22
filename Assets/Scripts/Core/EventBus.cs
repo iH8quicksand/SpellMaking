@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 public class EventBus 
 {
@@ -21,6 +22,13 @@ public class EventBus
     public event Action<Spell> AddSpell;
     public event Action<int> SetSpell;
     public event Action<int> RemoveSpell;
+    public event Action<string> GainMana;
+    public event Action StandingStill;
+    public event Action<string> GainSpellPower;
+    public event Action OnKill;
+    public event Action OnMove;
+    public event Action OnCastSpell;
+    public event Action<string> GainHealth;
     
     public void DoDamage(Vector3 where, Damage dmg, Hittable target)
     {
@@ -45,6 +53,34 @@ public class EventBus
     public void Broadcast_RemoveSpell(int index)
     {
         RemoveSpell?.Invoke(index);
+    }
+    public void Broadcast_GainMana(string rpn_manaGained)//effect to receive
+    {
+        GainMana?.Invoke(rpn_manaGained);
+    }
+    public void Broadcast_StandingStill()//trigger to send
+    {
+        StandingStill?.Invoke();
+    }
+    public void Broadcast_GainSpellPower(string rpn_spellPower)//effect to receive
+    {
+        GainSpellPower?.Invoke(rpn_spellPower);
+    }
+    public void Broadcast_OnKill()//trigger to send
+    {
+        OnKill?.Invoke();
+    }
+    public void Broadcast_OnMove()//trigger to send
+    {
+        OnMove?.Invoke();
+    }
+    public void Broadcast_OnCastSpell()//trigger to send
+    {
+        OnCastSpell?.Invoke();
+    }
+    public void Broadcast_GainHealth(string rpn_healthGained)//effect to receive
+    {
+        GainHealth?.Invoke(rpn_healthGained);
     }
 
 }

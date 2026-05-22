@@ -85,6 +85,7 @@ public class Spell
 
     public virtual IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team)
     {
+        EventBus.Instance.Broadcast_OnCastSpell();
         this.team = team;
         GameManager.Instance.projectileManager.CreateProjectile(0, GetTrajectory(), where, target - where, GetSpeed(), OnHit);
         yield return new WaitForEndOfFrame();

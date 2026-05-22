@@ -34,10 +34,13 @@ public class PlayerController : MonoBehaviour
         spellcaster = new SpellCaster(125, 8, 10, Hittable.Team.PLAYER);
         spellcaster.transform = this.transform;
         StartCoroutine(spellcaster.ManaRegeneration());
+        EventBus.Instance.GainMana += spellcaster.GainMana;
+        EventBus.Instance.GainSpellPower += spellcaster.GainSpellPower;
         
         hp = new Hittable(100, Hittable.Team.PLAYER, gameObject);
         hp.OnDeath += Die;
         hp.team = Hittable.Team.PLAYER;
+        EventBus.Instance.GainHealth += hp.GainHP;
 
         // tell UI elements what to show
         healthui.SetHealth(hp);

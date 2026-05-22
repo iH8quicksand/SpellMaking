@@ -1,5 +1,11 @@
+using System;
+using Unity.VisualScripting;
+
 public class Trigger
 {
-    // all the triggers we implement will be sublcasses of this class
-    // each trigger should have an eventbus but idk what else
+    public string description {  get; set; }
+    public string type {  get; set; }
+    public string amount { get; set; }
+
+    public Trigger() { }
 }

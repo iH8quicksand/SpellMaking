@@ -72,5 +72,10 @@ public class GameManager
     {
         enemies = new List<GameObject>();
     }
+
+    public int GetWave()
+    {
+        return player.GetComponentInChildren<EnemySpawner>().wave_count;
+    }
     
 }

@@ -2,19 +2,18 @@ using JetBrains.Annotations;
 
 public class Relic
 {
-    private string trigger; // I know these should actually be triggers but this is placeholder
-    private string effect;
+    public string name { get; set; }
+    public int sprite { get; set; }
+    public Trigger trigger { get; set; }
+    public Effect effect { get; set; }
 
-    // constructor
-    public Relic (string trigger, string effect)
+    public Relic()
     {
-        this.trigger = trigger;
-        //SUBSCRIBE TO EVENTBUS FOR THAT TRIGGER HERE
-        this.effect = effect;
+
     }
 
-    public void UseEffect ()
+    public void OnTrigger()
     {
-        // something like: this.effect.use
+        effect.DoEffect();
     }
 }

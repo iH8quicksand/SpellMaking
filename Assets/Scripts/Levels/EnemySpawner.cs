@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
     Dictionary<string, Level> level_types = new Dictionary<string, Level>(); 
     Dictionary<string, PlayerClass> class_types = new Dictionary<string, PlayerClass>(); 
     public string currentLevelname;
-    private int wave_count;
+    public int wave_count;
     public int delay = 2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

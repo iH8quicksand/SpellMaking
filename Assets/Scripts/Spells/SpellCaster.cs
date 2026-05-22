@@ -69,4 +69,15 @@ public class SpellCaster
         equippedSpellIndex = index;
     }
 
+    public void GainSpellPower(string rpn_gainedeSpellPower)
+    {
+        Dictionary<string, int> rpnDict = new Dictionary<string, int> { { "wave", GameManager.Instance.GetWave() } };
+        spell_power += RPNEvaluator.RPNEvaluator.Evaluate(rpn_gainedeSpellPower, rpnDict);
+    }
+    public void GainMana(string rpn_gainedeMana)
+    {
+        Dictionary<string, int> rpnDict = new Dictionary<string, int> { { "wave", GameManager.Instance.GetWave() } };
+        mana += RPNEvaluator.RPNEvaluator.Evaluate(rpn_gainedeMana, rpnDict);
+    }
+
 }
