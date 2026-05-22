@@ -21,6 +21,10 @@ public class IconManager : MonoBehaviour
     {
         target.sprite = sprites[which];
     }
+    public void PlaceSprite(int which, SpriteRenderer target)
+    {
+        target.sprite = sprites[which];
+    }
 
     public Sprite Get(int index)
     {

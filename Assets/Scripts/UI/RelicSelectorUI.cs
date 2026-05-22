@@ -20,7 +20,7 @@ public class RelicSelectorUI : MonoBehaviour
         this.acceptRelic = acceptRelic;
         nameLabel.text = relic.name;
         descriptionLabel.text = relic.trigger.description + " " + relic.effect.description;
-        //change relic icon here
+        GameManager.Instance.relicIconManager.PlaceSprite(relic.sprite, icon.GetComponent<Image>());
     }
     public void Take()
     {

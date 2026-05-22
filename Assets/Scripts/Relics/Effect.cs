@@ -8,6 +8,8 @@ public class Effect
     public string until { get; set; }
     public Effect() { }
 
+    public Action OnEffectDone;
+
     private bool ready = true;
     public void DoEffect()
     {
@@ -26,6 +28,7 @@ public class Effect
                 break;
         }
         if (until != null) ready = false;
+        OnEffectDone?.Invoke();
     }
     public void ReadyUp()
     {

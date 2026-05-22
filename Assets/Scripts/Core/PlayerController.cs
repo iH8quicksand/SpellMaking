@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public Hittable hp;
     public HealthBar healthui;
     public ManaBar manaui;
+    public SpriteRenderer spriteRenderer;
 
     public SpellCaster spellcaster;
     public SpellUI spellui;
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour
     public void UpdatePlayerClass(PlayerClass pc)
     {
         playerClass = pc;
+        GameManager.Instance.playerSpriteManager.PlaceSprite(pc.sprite, spriteRenderer);
     }
 
     public void UpdatePlayerStats(int wave)
