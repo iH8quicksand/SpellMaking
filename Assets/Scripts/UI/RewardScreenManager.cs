@@ -1,12 +1,17 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 public class RewardScreenManager : MonoBehaviour
 {
     public GameObject rewardUI;
     public TextMeshProUGUI damageText;
     public GameObject spellsUI;
+    public GameObject relicUIPrefab;
+    public RelicManager relicManager;
 
     //New Spell Attributes
     public GameObject icon;
@@ -14,13 +19,21 @@ public class RewardScreenManager : MonoBehaviour
     public TextMeshProUGUI mana;
     public TextMeshProUGUI spellName;
     public TextMeshProUGUI description;
+    public GameObject spellPanel;
+    public GameObject getSpellButton;
     private Spell offeredSpell;
+
+    private List<GameObject> relicSelectors;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         EventBus.Instance.WaveEnd += Show;
         EventBus.Instance.WaveStart += Hide;
+        relicManager = new RelicManager();
+        relicManager.LoadRelics();
+        AcceptRelic += relicManager.ActivateRelic;
+        AcceptRelic += LockOtherRelics;
     }
 
     public void Show()
@@ -38,6 +51,21 @@ public class RewardScreenManager : MonoBehaviour
             spellsUI.GetComponent<SpellUIContainer>().showDropButtons();
         }
 
+        int availableRelics = Math.Min(3, relicManager.relicsLeft());
+        float spacingX = 300f;
+        float startX = -((availableRelics - 1) * spacingX) / 2f;
+        float currentX = startX;
+        relicSelectors = new List<GameObject>();
+        for (int i=0; i<availableRelics; i++)
+        {
+            GameObject selector = Instantiate(relicUIPrefab, rewardUI.transform);
+            selector.transform.localPosition = new Vector3(currentX, -135, 0);
+            Relic relic = relicManager.GetRelic();
+            selector.GetComponent<RelicSelectorUI>().SetRelic(relic, AcceptRelic);
+            relicSelectors.Add(selector);
+            currentX += spacingX;
+        }
+
         rewardUI.SetActive(true);
     }
 
@@ -51,7 +79,17 @@ public class RewardScreenManager : MonoBehaviour
         if (GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.spells.Count < 4)
         {
             EventBus.Instance.Broadcast_AddSpell(offeredSpell);
-            GameManager.Instance.player.GetComponentInChildren<EnemySpawner>().NextWave();
+            spellPanel.GetComponent<Image>().color = new Color32(0x1A, 0xFF, 0x00, 0x76);
+            getSpellButton.SetActive(false);
+            
+        }
+    }
+    public Action<Relic> AcceptRelic;
+    public void LockOtherRelics(Relic _)
+    {
+        foreach (GameObject relicSelector in relicSelectors)
+        {
+            relicSelector.GetComponent<RelicSelectorUI>().Lock();
         }
     }
 

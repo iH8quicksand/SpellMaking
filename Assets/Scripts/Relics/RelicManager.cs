@@ -10,25 +10,36 @@ using System;
  * Currently supported effects:
  *  gain-mana, gain-spellpower, gain-health
  */
-public class RelicManager : MonoBehaviour
+public class RelicManager
 {
     private List<Relic> relicPool;
-    private void Start()
-    {
-        LoadRelics();
-    }
+    private List<Relic> tempShownRelics;
     public void LoadRelics()
     {
         var relicsJSON = Resources.Load<TextAsset>("relics");
         relicPool = JsonConvert.DeserializeObject<List<Relic>>(relicsJSON.text);
+        tempShownRelics = new List<Relic>();
     }
     public Relic GetRelic()
     {
         if (relicPool.Count == 0) return null;
         int index = Math.Min(4,(int)(UnityEngine.Random.value * relicPool.Count));
         Relic relic = relicPool[index];
+        tempShownRelics.Add(relic);
         relicPool.RemoveAt(index);
         return relic;
+    }
+    public int relicsLeft()
+    {
+        return relicPool.Count;
+    }
+    public void PutUnusedRelicsBackInPool()
+    {
+        foreach (Relic relic in tempShownRelics)
+        {
+            relicPool.Add(relic);
+        }
+        tempShownRelics.Clear();
     }
     public Relic ConstructNewRandomRelic()
     {
@@ -37,6 +48,8 @@ public class RelicManager : MonoBehaviour
     }
     public void ActivateRelic(Relic relic)
     {
+        PutUnusedRelicsBackInPool();
+        relicPool.Remove(relic);
         EventBus eb = EventBus.Instance;
         //Register trigger as subscriber to its event
         switch(relic.trigger.type)
