@@ -18,6 +18,17 @@ public class Spell
     public SpellCaster owner;
     public Hittable.Team team;
 
+    public string name { get; set; }
+    public string description { get; set; }
+    public int icon {  get; set; }
+    public string N {  get; set; }
+    public string spray { get; set; }
+    public SpellDamage damage { get; set; }
+    public string manaCost { get; set; }
+    public string cooldown {  get; set; }
+    public Projectile projectile { get; set; }
+    public Projectile secondary_projectile { get; set; }
+
     public Spell(SpellCaster owner)
     {
         this.owner = owner;
@@ -33,13 +44,18 @@ public class Spell
 
     public virtual string GetName()
     {
-        return "Bolt";
+        return name ?? "Bolt";
+    }
+
+    private Dictionary<string, int> getRPNDict()
+    {
+        return new Dictionary<string, int> { { "power", owner.spell_power }, { "wave", GameManager.Instance.GetWave() } };
     }
 
     // STATS THAT GET CHANGED BY MODIFIERS ---------------------------------------
     public virtual int GetManaCost()
     {
-        float baseMana = 10f; // these base values should come from the JSON!!!
+        float baseMana = RPNEvaluator.RPNEvaluator.Evaluatef(manaCost ?? "10", getRPNDict());
         // Apply all the modifiers to the base stat
         float modifiedMana = ValueModifier.Apply(baseMana, manaModifiers);
         return Mathf.RoundToInt(modifiedMana);
@@ -47,21 +63,23 @@ public class Spell
 
     public virtual int GetDamage()
     {
-        float baseDamage = 100f;// these base values should come from the JSON!!!
+        float baseDamage = RPNEvaluator.RPNEvaluator.Evaluatef(damage.amount ?? "100", getRPNDict());
         float modifiedDamage = ValueModifier.Apply(baseDamage, damageModifiers);
         return Mathf.RoundToInt(modifiedDamage);
     }
 
     public virtual float GetCooldown()
     {
-        float baseCoolDown = 0.75f;// these base values should come from the JSON!!!
+        float baseCoolDown = RPNEvaluator.RPNEvaluator.Evaluatef(cooldown ?? "0.75", getRPNDict());
         float modifiedCoolDown = ValueModifier.Apply(baseCoolDown, cooldownModifiers);
         return Mathf.RoundToInt(modifiedCoolDown);
     }
 
-    public virtual float GetSpeed()
+    public virtual float GetSpeed(int projectileNumber)
     {
-        float baseSpeed = 15f;// these base values should come from the JSON!!!
+        Projectile p = (projectileNumber == 1) ? projectile : secondary_projectile;
+        if (p == null) return 0;
+        float baseSpeed = RPNEvaluator.RPNEvaluator.Evaluatef(p.speed ?? "15", getRPNDict());
         float modifiedSpeed = ValueModifier.Apply(baseSpeed, speedModifiers);
         return modifiedSpeed;
     }
@@ -75,7 +93,7 @@ public class Spell
 
     public virtual int GetIcon()
     {
-        return 0;
+        return icon;
     }
 
     public bool IsReady()
@@ -87,12 +105,16 @@ public class Spell
     {
         EventBus.Instance.Broadcast_OnCastSpell();
         this.team = team;
-        GameManager.Instance.projectileManager.CreateProjectile(0, GetTrajectory(), where, target - where, GetSpeed(), OnHit);
+        GameManager.Instance.projectileManager.CreateProjectile(0, GetTrajectory(1), where, target - where, GetSpeed(1), OnHit);
+        if (secondary_projectile != null) GameManager.Instance.projectileManager.CreateProjectile(0, GetTrajectory(2), where, target - where, GetSpeed(2), OnHit);
         yield return new WaitForEndOfFrame();
     }
 
-    public virtual string GetTrajectory()
+    public virtual string GetTrajectory(int projectileNumber)
     {
+        Projectile p = (projectileNumber == 1) ? projectile : secondary_projectile;
+        if (p == null) return null;
+        string trajectory = p.trajectory;
         return "straight";
     }
 

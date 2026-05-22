@@ -24,19 +24,14 @@ public class SpellUI : MonoBehaviour
     {
         this.spell = spell;
         GameManager.Instance.spellIconManager.PlaceSprite(spell.GetIcon(), icon.GetComponent<Image>());
+        manacost.text = spell.GetManaCost().ToString();
+        damage.text = spell.GetDamage().ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (spell == null) return;
-        if (Time.time > last_text_update + UPDATE_DELAY)
-        {
-            manacost.text = spell.GetManaCost().ToString();
-            damage.text = spell.GetDamage().ToString();
-            last_text_update = Time.time;
-        }
-        
         float since_last = Time.time - spell.last_cast;
         float perc;
         if (since_last > spell.GetCooldown())

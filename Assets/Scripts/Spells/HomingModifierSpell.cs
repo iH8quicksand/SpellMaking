@@ -15,7 +15,7 @@ public class HomingModifierSpell : ModifierSpell
     }
 
     // Override trajectory to homing — this is the behavior change
-    public override string GetTrajectory()
+    public override string GetTrajectory(int projectileNumber)
     {
         return "homing";
     }

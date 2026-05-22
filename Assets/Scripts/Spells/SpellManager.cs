@@ -17,7 +17,7 @@ using UnityEngine;
 */
 public class SpellManager : MonoBehaviour
 {
-    public Dictionary<string,JObject> baseSpells;
+    public Dictionary<string,Spell> baseSpells;
     public Dictionary<string,JObject> modifierSpells;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,7 +38,7 @@ public class SpellManager : MonoBehaviour
     */
     private void loadSpellsFromJSON()
     {
-        baseSpells = new Dictionary<string, JObject>();
+        baseSpells = new Dictionary<string, Spell>();
         modifierSpells = new Dictionary<string, JObject>();
         var spellJSON = Resources.Load<TextAsset>("spells");   // this loads the SPELLS from the spell JSON file
         Dictionary<string, JObject> allSpells = JsonConvert.DeserializeObject<Dictionary<string, JObject>>(spellJSON.text); // this deserializes the JSON into the spells dictionary as JObjects
@@ -46,7 +46,7 @@ public class SpellManager : MonoBehaviour
         {
             if (spell.Value.ContainsKey("icon")) // only base spells have icons, modifier spells don't
             {
-                baseSpells.Add(spell.Key, spell.Value);
+                baseSpells.Add(spell.Key, spell.Value.ToObject<Spell>());
             } else
             {
                 modifierSpells.Add(spell.Key, spell.Value);

@@ -19,10 +19,11 @@ public class SpellBuilder
         // Convert the dictionary keys into a list so we can pick a random index
         List<string> baseKeys = new List<string>(baseDict.Keys);
         string randomBaseId = baseKeys[Random.Range(0, baseKeys.Count)];
-        
+
         // Build the innermost doll using the logic we already perfected!
-        Spell mySpell = new Spell(owner);
-        mySpell.SetAttributes(baseDict[randomBaseId]);
+        //Spell mySpell = new Spell(owner);
+        //mySpell.SetAttributes(baseDict[randomBaseId]);
+        Spell mySpell = baseDict[randomBaseId];
 
         // --- 3. DECIDE HOW MANY MODIFIERS TO ADD ---
         // Let's say every spell gets between 1 and 3 random modifiers
@@ -94,12 +95,12 @@ public class SpellBuilder
     // Arcane Bolt (or whatever spell is first in the JSON)
     public Spell BuildSpecificSpell(SpellCaster owner , string spellName)
     {
-        Spell baseSpell = new Spell(owner); 
+        //Spell baseSpell = new Spell(owner); 
         // 2. Fetch "arcane_bolt" (or whatever spellID is passed in) from the Base Spells dictionary
-        JObject spellData = GameManager.Instance.spellManager.baseSpells[spellName];
+        Spell baseSpell = GameManager.Instance.spellManager.baseSpells[spellName];
 
         // 3. The blank slate reads the JSON and "becomes" the Arcane Bolt
-        baseSpell.SetAttributes(spellData);
+        //baseSpell.SetAttributes(spellData);
         return baseSpell;
     }
 

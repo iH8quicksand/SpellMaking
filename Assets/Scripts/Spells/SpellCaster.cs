@@ -33,7 +33,6 @@ public class SpellCaster
         this.spell_power = spell_power;
         this.team = team;
         spells = new List<Spell>();
-        spells.Add(GenerateRandomSpell());
         equippedSpellIndex = 0;
         EventBus.Instance.AddSpell += AddSpell;
         EventBus.Instance.SetSpell += SetSpell;
