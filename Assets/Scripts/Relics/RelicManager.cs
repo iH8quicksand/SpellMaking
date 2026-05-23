@@ -56,7 +56,16 @@ public class RelicManager
         switch(relic.trigger.type)
         {
             case "take-damage":
-                eb.OnDamage += (_,_,_) => relic.OnTrigger();//subscribes to onDamage while discarding its parameters
+                eb.OnDamage += (_, _, target) => {
+                    if (target.team == Hittable.Team.PLAYER)
+                        relic.OnTrigger();
+                };
+                break;
+            case "deal-damage":
+                eb.OnDamage += (_, _, target) => {
+                    if (target.team == Hittable.Team.MONSTERS)
+                        relic.OnTrigger();
+                };
                 break;
             case "stand-still":
                 eb.StandingStill += relic.OnTrigger;
@@ -76,9 +85,4 @@ public class RelicManager
                 break;
         }
     }
-
-    // create all relics and put them in a list that is a private field of this class
-    // 
-
-
 }

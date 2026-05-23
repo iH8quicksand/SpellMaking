@@ -5,10 +5,10 @@ public class Damage
     public int amount;
     public enum Type
     {
-        PHYSICAL, ARCANE, NATURE, FIRE, ICE, DARK, LIGHT
+        PHYSICAL, ARCANE, NATURE, FIRE, ICE, DARK, LIGHT, EMOTIONAL
     }
     public Type type;
-    public Damage(int amount, Type type)
+    public Damage(int amount, Type type) 
     {
         this.amount = amount;
         this.type = type;
@@ -23,6 +23,7 @@ public class Damage
         if (t == "ice") return Type.ICE;
         if (t == "dark") return Type.DARK;
         if (t == "light") return Type.LIGHT;
+        if (t == "emotional") return Type.EMOTIONAL;
         return Type.PHYSICAL;
     }
 }

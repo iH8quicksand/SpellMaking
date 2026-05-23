@@ -3,7 +3,7 @@
         "name": "Green Gem",
         "sprite": 0,
         "trigger": {
-            "description": "Whenever you take damage",
+            "description": "When you take damage",
             "type": "take-damage"
         },
         "effect": {
@@ -52,6 +52,46 @@
             "description": "you gain 25 mana.",
             "type": "gain-mana",
             "amount": "25"
+        }
+    },
+    {
+        "name": "Exquisite Blood",
+        "sprite": 4,
+        "trigger": {
+            "description": "When you deal damage to an enemy",
+            "type": "deal-damage"
+        },
+        "effect": {
+            "description": "you gain 5 life.",
+            "type": "gain-health",
+            "amount": "5"
+        }
+    },
+    {
+        "name": "Sanguine Bond",
+        "sprite": 5,
+        "trigger": {
+            "description": "When you gain life",
+            "type": "gain-health"
+        },
+        "effect": {
+            "description": "a random enemy takes 10 damage.",
+            "type": "deal-damage-random-enemy",
+            "amount": "10"
+        }
+    },
+    {
+        "name": "Deep Concentration",
+        "sprite": 5,
+        "trigger": {
+            "description": "When you don't move for 5 seconds",
+            "type": "stand-still",
+            "amount": "5"
+        },
+        "effect": {
+            "description": "you gain 20 life.",
+            "type": "gain-health",
+            "amount": "20"
         }
     }
 ]

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class Effect
 {
@@ -25,6 +26,11 @@ public class Effect
                 break;
             case "gain-health":
                 eb.Broadcast_GainHealth(amount);
+                break;
+            case "deal-damage-random-enemy":
+                Damage damageDealt = new Damage(int.Parse(amount), Damage.Type.DARK);
+                Hittable enemy = GameManager.Instance.GetClosestEnemy(GameManager.Instance.player.transform.position).GetComponent<Hittable>();
+                eb.DoDamage(Vector3.zero, damageDealt, enemy);
                 break;
         }
         if (until != null) ready = false;
