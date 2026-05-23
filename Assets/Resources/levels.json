@@ -26,7 +26,7 @@
             }, 
             {
                 "enemy": "knight",
-                "count": "1 wave +",
+                "count": "0 wave +",
                 "hp": "100 70 wave * +",
                 "delay": "10",
                 "damage": "base 50 +",

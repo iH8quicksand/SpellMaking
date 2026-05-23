@@ -17,8 +17,6 @@ public class PlayerController : MonoBehaviour
 
     public SpellCaster spellcaster;
     public SpellUI spellui;
-    
-    public List<Relic> relics;
 
     public int speed;
 
