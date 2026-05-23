@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="CoroutineManager" Collapsed="true">
+    <Position X="17.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAI=</HashCode>
+      <FileName>Assets\Scripts\Core\CoroutineManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EventBus" Collapsed="true">
+    <Position X="15.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIICIAAgIAAYQAAAECACEABQAAECAEQIgAiEAgAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\EventBus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager" Collapsed="true">
+    <Position X="19" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAoAQEAIQAAAABAAACAAEAABBAAAAAQFQCwAAAAIAAA=</HashCode>
+      <FileName>Assets\Scripts\Core\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerClass" Collapsed="true">
+    <Position X="13.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAQgAIAAAAAAAACg=</HashCode>
+      <FileName>Assets\Scripts\Core\PlayerClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="13.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IARQAAAAASAgBCCoAAAAAAAAAAAAAQAIAABAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Core\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Damage" Collapsed="true">
+    <Position X="13.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABiAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\DamageSystem\Damage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hittable" Collapsed="true">
+    <Position X="13.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAACAAAAAgQAAAAAAAIAAAAAQAAAAAABAAAAAAAE=</HashCode>
+      <FileName>Assets\Scripts\DamageSystem\Hittable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteView" Collapsed="true">
+    <Position X="25.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAADAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Internal\SpriteView.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteViewer" Collapsed="true">
+    <Position X="25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACBAAIAAAQAAAAAAAAAAAAAAAAAAAgIAAAA=</HashCode>
+      <FileName>Assets\Scripts\Internal\SpriteViewer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="21.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAABAEAQAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemySpawner" Collapsed="true">
+    <Position X="21.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAABABCAACBAAABCAIAggCAACAAAAAgAMAAEQAAo=</HashCode>
+      <FileName>Assets\Scripts\Levels\EnemySpawner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Level" Collapsed="true">
+    <Position X="21.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAEAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\Level.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SetPerameters" Collapsed="true">
+    <Position X="21.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAgCAAABAQAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\SetPerameters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spawn" Collapsed="true">
+    <Position X="21.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAABAAAAAgCAAAAAAAAAQBAAAAAAAI=</HashCode>
+      <FileName>Assets\Scripts\Levels\Spawn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpawnPoint" Collapsed="true">
+    <Position X="21.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAgCAAAAIAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Levels\SpawnPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyController" Collapsed="true">
+    <Position X="21.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgQAQAAAACAAgAAgIAAAAAAAAAAAAQAIAABAAAAACAA=</HashCode>
+      <FileName>Assets\Scripts\Movement\EnemyController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Unit" Collapsed="true">
+    <Position X="13.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAqAEAAAAAAAAAAAAAEAEAAACAAABAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Movement\Unit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HomingProjectileMovement" Collapsed="true">
+    <Position X="0.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAIAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\HomingProjectileMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectileController" Collapsed="true">
+    <Position X="19.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAEAAAAAAQQAAAAAAAAAABAAAAgAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\ProjectileController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectileMovement" Collapsed="true">
+    <Position X="2.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\ProjectileMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpiralingProjectileMovement" Collapsed="true">
+    <Position X="2.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgBAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\SpiralingProjectileMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StraightProjectileMovement" Collapsed="true">
+    <Position X="5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Projectiles\StraightProjectileMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Effect" Collapsed="true">
+    <Position X="25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAQAQIAAAIAAAAAAAAAABgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Relics\Effect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Relic" Collapsed="true">
+    <Position X="24.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAEAAAAAAABAAAAAAAABAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Relics\Relic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RelicManager" Collapsed="true">
+    <Position X="24.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAACAEAAAAAAgAAAQIACAAAAAAAACAAA=</HashCode>
+      <FileName>Assets\Scripts\Relics\RelicManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Trigger" Collapsed="true">
+    <Position X="25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAABgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Relics\Trigger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CoolDownModifierSpell" Collapsed="true">
+    <Position X="2.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Spells\CoolDownModifierSpell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamageModifierSpell" Collapsed="true">
+    <Position X="4.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Spells\DamageModifierSpell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoublerModifier" Collapsed="true">
+    <Position X="6" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAgAAAAAAgAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Spells\DoublerModifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HomingModifierSpell" Collapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Spells\HomingModifierSpell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManaModifierSpell" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Spells\ManaModifierSpell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModifierSpell" Collapsed="true">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAEAAAAgABAAAACgAAAAAAAEAAIGAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Spells\ModifierSpell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectileManager" Collapsed="true">
+    <Position X="19.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAACA=</HashCode>
+      <FileName>Assets\Scripts\Spells\ProjectileManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpeedModifierSpell" Collapsed="true">
+    <Position X="0.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Spells\SpeedModifierSpell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Spell" Collapsed="true">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAEAACAgAhAAAACgAEAAAAQEQAIFACAAAABAABAI=</HashCode>
+      <FileName>Assets\Scripts\Spells\Spell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellBuilder" Collapsed="true">
+    <Position X="13.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Spells\SpellBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellCaster" Collapsed="true">
+    <Position X="13.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAEAAAIIAAAAACAAAAAAAAAAUECABAASAAEIAACA=</HashCode>
+      <FileName>Assets\Scripts\Spells\SpellCaster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellManager" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAABAAAIAAAAAAAAAAIAAAAAAAAgAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Spells\SpellManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SplitterModifierSpell" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAQgAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Spells\SplitterModifierSpell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ValueModifier" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAABACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Spells\ValueModifier.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemySpriteManager" Collapsed="true">
+    <Position X="0.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpriteManagement\EnemySpriteManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IconManager" Collapsed="true">
+    <Position X="3.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAACAAAABAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpriteManagement\IconManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSpriteManager" Collapsed="true">
+    <Position X="2.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpriteManagement\PlayerSpriteManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RelicIconManager" Collapsed="true">
+    <Position X="5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpriteManagement\RelicIconManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellIconManager" Collapsed="true">
+    <Position X="7.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SpriteManagement\SpellIconManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimateDamage" Collapsed="true">
+    <Position X="15.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAEACCIAAYAAAAAAAggEAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\AnimateDamage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassSelectorController" Collapsed="true">
+    <Position X="21.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQBAAAAAAAABAIAAAAAAAAAIAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\ClassSelectorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DamageNumbers" Collapsed="true">
+    <Position X="15.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAICAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\DamageNumbers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameOverSceneManager" Collapsed="true">
+    <Position X="13.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAE=</HashCode>
+      <FileName>Assets\Scripts\UI\GameOverSceneManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HealthBar" Collapsed="true">
+    <Position X="17.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAACAAAAAAAAAAAAAAABEAgAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\HealthBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ManaBar" Collapsed="true">
+    <Position X="17.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAACAAAAAAAACAAAAAAAAEAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\ManaBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MenuSelectorController" Collapsed="true">
+    <Position X="21.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQBAAAACAAABAAAAAQAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\MenuSelectorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RelicSelectorUI" Collapsed="true">
+    <Position X="20.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAABAAAAAAEAAAAAAAAAACAAAAAAAAQEIAQQAIAA=</HashCode>
+      <FileName>Assets\Scripts\UI\RelicSelectorUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RelicUI" Collapsed="true">
+    <Position X="20.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAACAAABAAJQAAAAAAAAgAAAABAQBIAAABIAA=</HashCode>
+      <FileName>Assets\Scripts\UI\RelicUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RelicUIManager" Collapsed="true">
+    <Position X="20.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAACAAAAAAAgAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\RelicUIManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RewardScreenManager" Collapsed="true">
+    <Position X="19.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAASAggAAAOgAQggAEAAAEAEAAAQRARACQICA=</HashCode>
+      <FileName>Assets\Scripts\UI\RewardScreenManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellUI" Collapsed="true">
+    <Position X="22.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAACAAgAAAAAAAAAAAQSAAACACAQDAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\SpellUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpellUIContainer" Collapsed="true">
+    <Position X="22.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACKAAAAIAAAAAAAAAAAAEAABAAAAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\SpellUIContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaveLabelController" Collapsed="true">
+    <Position X="23.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\UI\WaveLabelController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
