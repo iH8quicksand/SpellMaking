@@ -59,6 +59,7 @@ public class RewardScreenManager : MonoBehaviour
 
         if (GameManager.Instance.GetWave() % 3 == 0) ShowRelics();
 
+        spellPanel.GetComponent<Image>().raycastTarget = false;
         spellPanel.GetComponent<Image>().color = new Color32(0x00, 0x00, 0x00, 0x22);
         rewardUI.SetActive(true);
     }
