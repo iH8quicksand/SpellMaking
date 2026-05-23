@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System.Diagnostics;
 
 public class Relic
 {

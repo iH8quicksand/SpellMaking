@@ -87,7 +87,7 @@ public class EnemySpawner : MonoBehaviour
         GameManager.Instance.player.GetComponent<PlayerController>().UpdatePlayerStats(1);
         // this is not nice: we should not have to be required to tell the player directly that the level is starting
         GameManager.Instance.player.GetComponent<PlayerController>().StartLevel();
-        Debug.Log($"Starting level: {currentLevelname}");
+        //Debug.Log($"Starting level: {currentLevelname}");
 
         StartCoroutine(SpawnWave()); // I feel like we should pass the levelname to SpawnWave()
     }
@@ -145,7 +145,7 @@ public class EnemySpawner : MonoBehaviour
 
                 for (int index = 0; index < batchSize; index++)
                 {
-                    Debug.unityLogger.Log(spawn.enemy);
+                    //Debug.unityLogger.Log(spawn.enemy);
                     SpawnEnemy(parameters); 
                 }
 
@@ -191,7 +191,7 @@ public class EnemySpawner : MonoBehaviour
             spawn_point = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
         }
 
-        Debug.Log($"Spawning {parameters.type} at {spawn_point.name} | position: {spawn_point.transform.position}");
+        //Debug.Log($"Spawning {parameters.type} at {spawn_point.name} | position: {spawn_point.transform.position}");
 
         Vector3 initial_position = spawn_point.GetRandomPosition();
 
@@ -230,7 +230,7 @@ public class EnemySpawner : MonoBehaviour
         foreach (var kvp in level_types)
         {
             Level level = kvp.Value;
-            Debug.Log($"=== LEVEL: {level.name} | Waves: {level.waves} | Total Spawns: {level.spawns.Count} ===");
+            //Debug.Log($"=== LEVEL: {level.name} | Waves: {level.waves} | Total Spawns: {level.spawns.Count} ===");
             
         }
     }

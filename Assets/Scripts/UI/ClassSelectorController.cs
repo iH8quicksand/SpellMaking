@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ClassSelectorController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ClassSelectorController : MonoBehaviour
     {
         playerClass = pc;
         label.text = name;
+        GameManager.Instance.playerSpriteManager.PlaceSprite(pc.sprite, icon.GetComponent<Image>());
 
     }
 
