@@ -24,7 +24,7 @@ public class RelicManager
     public Relic GetRelic()
     {
         if (relicPool.Count == 0) return null;
-        int index = Math.Min(4,(int)(UnityEngine.Random.value * relicPool.Count));
+        int index = UnityEngine.Random.Range(0, relicPool.Count);
         Relic relic = relicPool[index];
         tempShownRelics.Add(relic);
         relicPool.RemoveAt(index);
