@@ -83,6 +83,17 @@ public class SpellBuilder
                     float homingManaAdd = (float)modJson["mana_adder"];
                     mySpell = new HomingModifierSpell(owner, mySpell, prefix, homingDmgMult, homingManaAdd);
                     break;
+                case "cursed":
+                    break;
+                case "reverse":
+                    float reverseManaAdd = (float)modJson["mana_adder"];
+                    mySpell = new ReverseModifierSpell(owner, mySpell, prefix, reverseManaAdd);
+                    break;
+                case "slow":
+                    break;
+                case "chaos":
+                    break;
+
             }
         }
 
