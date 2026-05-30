@@ -31,6 +31,13 @@
                 "delay": "10",
                 "damage": "base 50 +",
                 "location": "random bone"
+            },
+            {
+                "enemy": "trout",
+                "count": "2 wave *",
+                "hp": "2 wave *",
+                "delay": "1",
+                "location": "random"
             }
         ]
    },
@@ -102,6 +109,13 @@
                "delay": "10",
                "damage": "base 50 +",
                "location": "random bone"
+            },
+            {
+                "enemy": "trout",
+                "count": "3 wave *",
+                "hp": "3 wave *",
+                "delay": "3",
+                "location": "random"
             }
         ]
    }
