@@ -90,8 +90,12 @@ public class SpellBuilder
                     mySpell = new ReverseModifierSpell(owner, mySpell, prefix, reverseManaAdd);
                     break;
                 case "slow":
+                    float spdMult = (float)modJson["speed_multiplier"];
+                    mySpell = new SlowModifierSpell(owner, mySpell, prefix, ValueModifier.ModifierType.Multiply, spdMult);
                     break;
                 case "chaos":
+                    float chaosDmgMult = (float)modJson["damage_multiplier"];
+                    mySpell = new ChaosModifierSpell(owner, mySpell, prefix, chaosDmgMult);
                     break;
 
             }
