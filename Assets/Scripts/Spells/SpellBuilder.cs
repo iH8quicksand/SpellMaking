@@ -84,10 +84,9 @@ public class SpellBuilder
                     mySpell = new HomingModifierSpell(owner, mySpell, prefix, homingDmgMult, homingManaAdd);
                     break;
                 case "cursed":
-                    float cursedCdMulti = (float)modJson["cooldown_multiplier"];
-                    mySpell = new CoolDownModifierSpell(owner, mySpell, prefix, ValueModifier.ModifierType.Multiply, cursedCdMulti);
-                    float cursedManaMult = (float)modJson["mana_multiplier"];
-                    mySpell = new CursedModifierSpell(owner, mySpell, prefix, cursedManaMult);
+                    float cursedDmgMulti = (float)modJson["damage_multiplier"];
+                    float cursedCDMult = (float)modJson["cooldown_multiplier"];
+                    mySpell = new CursedModifierSpell(owner, mySpell, prefix, cursedDmgMulti, cursedCDMult);
                     break;
                 case "reverse":
                     float reverseManaAdd = (float)modJson["mana_adder"];
