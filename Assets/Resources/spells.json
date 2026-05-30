@@ -119,8 +119,9 @@
   },
   "cursed": {
     "name": "cursed",
-    "description": "Cursed projectile with unpredictable effects(?)"
-    ""
+    "description": "Funny little thing. Make everything worse lol'",
+    "damage_multiplier": "0.5",
+    "cooldown_multiplier": "1.5"
   },
   "reverse": {
     "name": "reverse",
@@ -131,8 +132,8 @@
   },
   "slow": {
     "name": "slow",
-    "description": "Projectile that slows down the enemies",
-    "cooldown_multiplier": "1.25",
-    "mana_multiplier": "1.25"
+    "description": "Slow but heavy hitting projectiles",
+    "cooldown_multiplier": "1.5",
+    "damage_multiplier": "1.5"
   }
 }
