@@ -29,6 +29,7 @@ public class EventBus
     public event Action OnMove;
     public event Action OnCastSpell;
     public event Action<string> GainHealth;
+    public event Action<string> MaxHealthIncrease;
     
     public void DoDamage(Vector3 where, Damage dmg, Hittable target)
     {
@@ -81,6 +82,10 @@ public class EventBus
     public void Broadcast_GainHealth(string rpn_healthGained)//effect to receive
     {
         GainHealth?.Invoke(rpn_healthGained);
+    }
+    public void Broadcast_IncreaseMaxHealth(string rpn_maxhealthincrease)
+    {
+        MaxHealthIncrease?.Invoke(rpn_maxhealthincrease);
     }
 
 }

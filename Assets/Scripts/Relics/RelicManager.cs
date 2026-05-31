@@ -73,6 +73,9 @@ public class RelicManager
             case "on-kill":
                 eb.OnKill += relic.OnTrigger;
                 break;
+            case "wave-end":
+                eb.WaveEnd += relic.OnTrigger;
+                break;
         }
         //Register effect "until"s as subscribers to their events
         switch(relic.effect.until)
