@@ -93,5 +93,36 @@
             "type": "gain-health",
             "amount": "20"
         }
+    },
+    {
+        "name": "Divine intervention",
+        "sprite": 6,
+        "trigger":{
+            "description": "When you take damage",
+            "type": "take-damage"
+        },
+        "effect": {
+            "description": "you gain 3 mana.",
+            "type": "gain-mana",
+            "amount": "3"
+        }
+    },
+    {
+        "name": "Something something",
+        "sprite": 8,
+        "trigger":{
+            "description": "When you stand still",
+            "type": "stand-still",
+            "amount": 1
+        },
+        "effect": {
+            "description": "you gain 1 health.",
+            "type": "gain-health",
+            "amount": "1",
+            "until": "move"
+        }
+
     }
+        
+
 ]
