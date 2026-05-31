@@ -41,6 +41,11 @@ public class Hittable
         this.max_hp = max_hp;
         this.hp = Mathf.RoundToInt(perc * max_hp);
     }
+    public void IncreaseMaxHealth(string amount)
+    {
+        Dictionary<string, int> rpnDict = new Dictionary<string, int> { { "wave", GameManager.Instance.GetWave() } };
+        this.max_hp += RPNEvaluator.RPNEvaluator.Evaluate(amount, rpnDict);
+    }
     public void GainHP(string rpn_hpGained)
     {
         Dictionary<string, int> rpnDict = new Dictionary<string, int> { { "wave", GameManager.Instance.GetWave() } };

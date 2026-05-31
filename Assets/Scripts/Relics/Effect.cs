@@ -32,6 +32,10 @@ public class Effect
                 Hittable enemy = GameManager.Instance.GetClosestEnemy(GameManager.Instance.player.transform.position).GetComponent<Hittable>();
                 eb.DoDamage(Vector3.zero, damageDealt, enemy);
                 break;
+            case "increase-max-health":
+                GameManager.Instance.player.GetComponent<PlayerController>().hp.IncreaseMaxHealth(amount);
+                break;
+                
         }
         if (until != null) ready = false;
         OnEffectDone?.Invoke();

@@ -121,7 +121,19 @@
             "amount": "1",
             "until": "move"
         }
-
+    },
+    {
+        "name": "Waveform",
+        "sprite": 9 ,
+        "trigger":{
+            "description": "When a wave ends",
+            "type": "wave-end"
+        },
+        "effect": {
+            "description": "your max health increases by 5.",
+            "type": "increase-max-health",
+            "amount": "5"
+        }
     }
         
 
