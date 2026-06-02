@@ -16,25 +16,10 @@ public class RelicUI : MonoBehaviour
     public TextMeshProUGUI label;
     public GameObject description;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnDestroy()
     {
-        // if a player has relics, this is how you *could* show them
-        /*
-        Relic r = player.relics[index];
-        GameManager.Instance.relicIconManager.PlaceSprite(r.sprite, icon);
-        */
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Relics could have labels and/or an active-status
-        /*
-        Relic r = player.relics[index];
-        label.text = r.GetLabel();
-        highlight.SetActive(r.IsActive());
-        */
+        EventBus.Instance.WaveEnd -= UpdateStatLabel;
+        relic.Effect.OnEffectDone -= OnTrigger;
     }
 
     public void SetRelic(Relic relic)
@@ -42,8 +27,8 @@ public class RelicUI : MonoBehaviour
         this.relic = relic;
         UpdateStatLabel();
         EventBus.Instance.WaveEnd += UpdateStatLabel;
-        description.GetComponent<TextMeshProUGUI>().text = relic.trigger.description + " " + relic.effect.description;
-        switch(relic.effect.type)
+        description.GetComponent<TextMeshProUGUI>().text = relic.Trigger.Description + " " + relic.Effect.Description;
+        switch(relic.Effect.Type)
         {
             case "gain-mana":
                 label.color = new Color32(0x00, 0x03, 0xFF, 0xFF);
@@ -55,13 +40,13 @@ public class RelicUI : MonoBehaviour
                 label.color = new Color32(0xFF, 0x00, 0x00, 0xFF);
                 break;
         }
-        GameManager.Instance.relicIconManager.PlaceSprite(relic.sprite, icon);
-        relic.effect.OnEffectDone += OnTrigger;
+        GameManager.Instance.relicIconManager.PlaceSprite(relic.Sprite, icon);
+        relic.Effect.OnEffectDone += OnTrigger;
     }
     public void UpdateStatLabel()
     {
-        Dictionary<string, int> rpnDict = new Dictionary<string, int> { {"wave", GameManager.Instance.GetWave()}, {"power", player.spellcaster.spell_power} };
-        label.text = RPNEvaluator.RPNEvaluator.Evaluate(relic.effect.amount, rpnDict).ToString();
+        Dictionary<string, int> rpnDict = new() { {"wave", GameManager.Instance.GetWave()}, {"power", player.spellcaster.spell_power} };
+        label.text = RPNEvaluator.RPNEvaluator.Evaluate(relic.Effect.Amount, rpnDict).ToString();
     }
     public void OnTrigger()
     {

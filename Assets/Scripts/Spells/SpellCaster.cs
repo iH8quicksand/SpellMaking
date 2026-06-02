@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
 
 public class SpellCaster 
 {
@@ -32,8 +30,10 @@ public class SpellCaster
         this.mana_reg = mana_reg;
         this.spell_power = spell_power;
         this.team = team;
-        spells = new List<Spell>();
-        spells.Add(GenerateRandomSpell());
+        spells = new List<Spell>
+        {
+            SpellBuilder.Build(this, "arcane_bolt", 0)
+        };
         equippedSpellIndex = 0;
         EventBus.Instance.AddSpell += AddSpell;
         EventBus.Instance.SetSpell += SetSpell;
@@ -42,7 +42,7 @@ public class SpellCaster
 
     public Spell GenerateRandomSpell()
     {
-        return new SpellBuilder().Build(this);
+        return SpellBuilder.Build(this);
     }
 
     public void AddSpell(Spell newSpell)
@@ -52,10 +52,11 @@ public class SpellCaster
     public void RemoveSpell(int index)
     {
         spells.RemoveAt(index);
+        if (equippedSpellIndex >= index) equippedSpellIndex--;
     }
 
     public IEnumerator Cast(Vector3 where, Vector3 target)
-    {        
+    {
         if (mana >= spells[equippedSpellIndex].GetManaCost() && spells[equippedSpellIndex].IsReady())
         {
             mana -= spells[equippedSpellIndex].GetManaCost();
@@ -71,12 +72,12 @@ public class SpellCaster
 
     public void GainSpellPower(string rpn_gainedeSpellPower)
     {
-        Dictionary<string, int> rpnDict = new Dictionary<string, int> { { "wave", GameManager.Instance.GetWave() } };
+        Dictionary<string, int> rpnDict = new() { { "wave", GameManager.Instance.GetWave() } };
         spell_power += RPNEvaluator.RPNEvaluator.Evaluate(rpn_gainedeSpellPower, rpnDict);
     }
     public void GainMana(string rpn_gainedeMana)
     {
-        Dictionary<string, int> rpnDict = new Dictionary<string, int> { { "wave", GameManager.Instance.GetWave() } };
+        Dictionary<string, int> rpnDict = new() { { "wave", GameManager.Instance.GetWave() } };
         mana += RPNEvaluator.RPNEvaluator.Evaluate(rpn_gainedeMana, rpnDict);
     }
 

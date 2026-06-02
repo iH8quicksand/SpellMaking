@@ -47,7 +47,7 @@ public class Unit : MonoBehaviour
 
     public void Move(Vector2 ds)
     {
-        List<RaycastHit2D> hits = new List<RaycastHit2D>();
+        List<RaycastHit2D> hits = new();
         int n = GetComponent<Rigidbody2D>().Cast(ds, hits, ds.magnitude * 2);
         if (n == 0)
         {

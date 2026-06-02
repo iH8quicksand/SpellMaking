@@ -1,9 +1,9 @@
 ﻿public class PlayerClass
 {
-    public int sprite { get; set; }
-    public string health { get; set; }
-    public string mana { get; set; }
-    public string mana_regeneration { get; set; }
-    public string spellpower { get; set; }
-    public string speed { get; set; }
+    public int Sprite { get; set; }
+    public string Health { get; set; }
+    public string Mana { get; set; }
+    public string Mana_Regeneration { get; set; }
+    public string Spellpower { get; set; }
+    public string Speed { get; set; }
 }

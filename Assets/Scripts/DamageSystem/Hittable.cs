@@ -48,7 +48,7 @@ public class Hittable
     }
     public void GainHP(string rpn_hpGained)
     {
-        Dictionary<string, int> rpnDict = new Dictionary<string, int> { { "wave", GameManager.Instance.GetWave() } };
+        Dictionary<string, int> rpnDict = new() { { "wave", GameManager.Instance.GetWave() } };
         hp += RPNEvaluator.RPNEvaluator.Evaluate(rpn_hpGained, rpnDict);
         hp = Math.Min(hp, max_hp);
     }

@@ -1,20 +1,18 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEditor;
 using UnityEngine;
 
-/*
- * Purpose: Initialize all the spells from spells.json at the start of the game
- *          so that SpellBuilder can access the base spells and modifier spells
- *          needed to give the player new spells at the end of each wave.
- *          
- *          Also, bridge the spell buttons in unity to the codebase. For example:
- *          Setting active spell, dropping a spell.
- *          
- * Usage: GameManager.Instance.spellManager.baseSpells/modifierSpells...
-*/
+/// <summary>
+/// Initialize all the spells from spells.json at the start of the game
+/// so that SpellBuilder can access the base spells and modifier spells
+/// needed to give the player new spells at the end of each wave.
+/// Also, bridge the spell buttons in Unity to the codebase. For example:
+/// Setting active spell, dropping a spell.
+/// <example>
+/// Usage: <code>GameManager.Instance.spellManager.baseSpells</code> or <code>GameManager.Instance.spellManager.modifierSpells</code>
+/// </example>
+/// </summary>
 public class SpellManager : MonoBehaviour
 {
     public Dictionary<string,JObject> baseSpells;
@@ -24,19 +22,15 @@ public class SpellManager : MonoBehaviour
     void Awake()
     {
         GameManager.Instance.spellManager = this;
-        loadSpellsFromJSON();
+        LoadSpellsFromJSON();
     }
 
-    /*
-     * Purpose: Translate JSON file into a dictionary with all the JSON's attributes.
-     *          Filter the resultant dictionary into two dictionaries for each type
-     *          of spell: base spells and modifier spells.
-     *          
-     * Parameters: None
-     * 
-     * Returns: None
-    */
-    private void loadSpellsFromJSON()
+    /// <summary>
+    /// Translates JSON file into a dictionary with all the JSON's attributes.
+    /// Filters the resultant dictionary into two dictionaries for each type
+    /// of spell: base spells and modifier spells.
+    /// </summary>
+    private void LoadSpellsFromJSON()
     {
         baseSpells = new Dictionary<string, JObject>();
         modifierSpells = new Dictionary<string, JObject>();
@@ -54,11 +48,19 @@ public class SpellManager : MonoBehaviour
         }
     }
 
-    public void setSpell(int index)
+    /// <summary>
+    /// Called when a spell hotbar slot is clicked on. Used to change the player's active spell.
+    /// </summary>
+    /// <param name="index">0-3 depending on which slot was clicked.</param>
+    public void SetSpell(int index)
     {
         EventBus.Instance.Broadcast_SetSpell(index);
     }
-    public void removeSpell(int index)
+    /// <summary>
+    /// Called when a spell hotbar slot's drop button is clicked. Used to remove a spell from the player's "inventory".
+    /// </summary>
+    /// <param name="index">0-3 depending on which slot's drop button was clicked.</param>
+    public void RemoveSpell(int index)
     {
         EventBus.Instance.Broadcast_RemoveSpell(index);
     }

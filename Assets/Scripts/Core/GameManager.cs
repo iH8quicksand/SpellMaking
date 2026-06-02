@@ -20,8 +20,7 @@ public class GameManager
     private static GameManager theInstance;
     public static GameManager Instance {  get
         {
-            if (theInstance == null)
-                theInstance = new GameManager();
+            theInstance ??= new GameManager();// if it's null, set it to new gamemanager
             return theInstance;
         }
     }
@@ -37,8 +36,8 @@ public class GameManager
     
     public int total_damage_dealt = 0;
     
-    private List<GameObject> enemies;
-    public int enemy_count { get { return enemies.Count; } }
+    private readonly List<GameObject> enemies;
+    public int Enemy_Count { get { return enemies.Count; } }
 
     public void AddEnemy(GameObject enemy)
     {
@@ -52,6 +51,16 @@ public class GameManager
     public void ResetEnemyCount()
     {
         enemies.Clear();
+    }
+    
+    public void ResetEnemies()
+    {
+        for(int i=enemies.Count-1; i>=0; i--)
+        {
+            EnemyController ec = enemies[i].GetComponent<EnemyController>();
+            EnemyController.Destroy(ec.gameObject);
+            enemies.RemoveAt(i);
+        }
     }
 
     public GameObject GetClosestEnemy(Vector3 point)

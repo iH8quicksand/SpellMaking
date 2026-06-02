@@ -9,12 +9,6 @@ public class DamageNumbers : MonoBehaviour
         EventBus.Instance.OnDamage += OnDamage;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnDamage(Vector3 where, Damage dmg, Hittable target)
     {
         var new_dmg_nr = Instantiate(DamageNumber, where, Quaternion.identity);

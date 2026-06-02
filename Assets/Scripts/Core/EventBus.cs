@@ -10,8 +10,7 @@ public class EventBus
     {
         get
         {
-            if (theInstance == null) // SINGLETON PATTERN SPOTTED
-                theInstance = new EventBus();
+            theInstance ??= new EventBus(); //SINGLETON YES
             return theInstance;
         }
     }
