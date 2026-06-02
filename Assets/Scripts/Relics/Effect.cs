@@ -33,7 +33,7 @@ public class Effect
                 eb.DoDamage(Vector3.zero, damageDealt, enemy);
                 break;
             case "increase-max-health":
-                GameManager.Instance.player.GetComponent<PlayerController>().hp.IncreaseMaxHealth(amount);
+                GameManager.Instance.player.GetComponent<PlayerController>().hp.IncreaseMaxHealth(Amount);
                 break;
                 
         }
