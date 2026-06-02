@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class SpellUIContainer : MonoBehaviour
 {
     public GameObject[] spellUIs;
     public PlayerController player;
+    public TextMeshProUGUI spellTooltip;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,17 +18,18 @@ public class SpellUIContainer : MonoBehaviour
         }
         EventBus.Instance.AddSpell += AddSpell;
         EventBus.Instance.RemoveSpell += RemoveSpell;
-        EventBus.Instance.WaveStart += hideDropButtons;
+        EventBus.Instance.WaveStart += HideDropButtons;
+        spellTooltip.text = "";
     }
 
-    public void showDropButtons()
+    public void ShowDropButtons()
     {
         foreach (GameObject spellUI in spellUIs)
         {
             spellUI.GetComponent<SpellUI>().dropbutton.SetActive(true);
         }
     }
-    public void hideDropButtons()
+    public void HideDropButtons()
     {
         foreach (GameObject spellUI in spellUIs)
         {
@@ -37,13 +40,13 @@ public class SpellUIContainer : MonoBehaviour
     {
         // First, get the index of the next free spell UI
         int freeIndex = 0;
-        while (freeIndex < spellUIs.Length)
+        while (freeIndex < spellUIs.Length-1)
         {
             if (spellUIs[freeIndex].activeSelf == false) break; //if the slot at freeIndex is inactive, break (freeIndex found)
             freeIndex++;
         }
         //Next, activate the spell UI and set its spell
-        Debug.Log("Free index found: " + freeIndex + ". (spellUIs.Length = " + spellUIs.Length);
+        //Debug.Log("Free index found: " + freeIndex + ". (spellUIs.Length = " + spellUIs.Length + ")");
         spellUIs[freeIndex].GetComponent<SpellUI>().SetSpell(newSpell);
         spellUIs[freeIndex].SetActive(true);
     }
@@ -54,7 +57,12 @@ public class SpellUIContainer : MonoBehaviour
         {
             spellUIs[i].GetComponent<SpellUI>().SetSpell(GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.spells[i]);
         }
-        hideDropButtons();
+        HideDropButtons();
     }
 
+    public void SetSpellTooltip(int spellIndex)
+    {
+        Spell spell = GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.spells[spellIndex];
+        spellTooltip.text = spell.GetName();
+    }
 }

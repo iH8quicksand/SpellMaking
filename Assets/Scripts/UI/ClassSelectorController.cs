@@ -13,7 +13,7 @@ public class ClassSelectorController : MonoBehaviour
     {
         playerClass = pc;
         label.text = name;
-        GameManager.Instance.playerSpriteManager.PlaceSprite(pc.sprite, icon.GetComponent<Image>());
+        GameManager.Instance.playerSpriteManager.PlaceSprite(pc.Sprite, icon.GetComponent<Image>());
 
     }
 

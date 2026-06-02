@@ -8,10 +8,4 @@ public class EnemySpriteManager : IconManager
     {
         GameManager.Instance.enemySpriteManager = this;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

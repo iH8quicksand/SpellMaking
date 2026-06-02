@@ -22,12 +22,6 @@ public class SpriteViewer : MonoBehaviour
         ChangeMode("enemies");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ChangeMode(string m)
     {
         foreach (var go in views)

@@ -1,17 +1,23 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
+using System.Linq;
 
 public class ProjectileController : MonoBehaviour
 {
+    public int collisions = 0;
+    public float startTime;
     public float lifetime;
     public event Action<Hittable,Vector3> OnHit;
-    public ProjectileMovement movement;
+    public event Action<ProjectileController> OnProjectileCollision;
+    public Trajectory movement;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        startTime = Time.time;
     }
 
     // Update is called once per frame
@@ -26,32 +32,31 @@ public class ProjectileController : MonoBehaviour
         if (collision.gameObject.CompareTag("projectile")) return;
         if (collision.gameObject.CompareTag("unit"))
         {
-            var ec = collision.gameObject.GetComponent<EnemyController>();
-            if (ec != null)
+            if (collision.gameObject.TryGetComponent<EnemyController>(out var ec))
             {
                 OnHit(ec.hp, transform.position);
             }
-            else
+            else if (collision.gameObject.TryGetComponent<PlayerController>(out var pc))
             {
-                var pc = collision.gameObject.GetComponent<PlayerController>();
-                if (pc != null)
-                {
-                    OnHit(pc.hp, transform.position);
-                }
+                OnHit(pc.hp, transform.position);
             }
-
         }
-        Destroy(gameObject);
+        OnProjectileCollision(this);
     }
 
     public void SetLifetime(float lifetime)
     {
-        StartCoroutine(Expire(lifetime));
+        if (lifetime>0) StartCoroutine(Expire(lifetime));
     }
 
     IEnumerator Expire(float lifetime)
     {
         yield return new WaitForSeconds(lifetime);
+        Destroy(gameObject);
+    }
+
+    public void DestroyProjectile()
+    {
         Destroy(gameObject);
     }
 }

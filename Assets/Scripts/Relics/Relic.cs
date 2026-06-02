@@ -3,10 +3,10 @@ using System.Diagnostics;
 
 public class Relic
 {
-    public string name { get; set; }
-    public int sprite { get; set; }
-    public Trigger trigger { get; set; }
-    public Effect effect { get; set; }
+    public string Name { get; set; }
+    public int Sprite { get; set; }
+    public Trigger Trigger { get; set; }
+    public Effect Effect { get; set; }
 
     public Relic()
     {
@@ -15,6 +15,6 @@ public class Relic
 
     public void OnTrigger()
     {
-        effect.DoEffect();
+        Effect.DoEffect();
     }
 }

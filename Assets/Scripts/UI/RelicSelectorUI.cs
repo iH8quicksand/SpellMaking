@@ -18,9 +18,9 @@ public class RelicSelectorUI : MonoBehaviour
     {
         this.relic = relic;
         this.acceptRelic = acceptRelic;
-        nameLabel.text = relic.name;
-        descriptionLabel.text = relic.trigger.description + " " + relic.effect.description;
-        GameManager.Instance.relicIconManager.PlaceSprite(relic.sprite, icon.GetComponent<Image>());
+        nameLabel.text = relic.Name;
+        descriptionLabel.text = relic.Trigger.Description + " " + relic.Effect.Description;
+        GameManager.Instance.relicIconManager.PlaceSprite(relic.Sprite, icon.GetComponent<Image>());
     }
     public void Take()
     {

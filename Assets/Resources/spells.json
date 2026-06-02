@@ -75,65 +75,116 @@
     }
   },
   "damage_amp": {
-    "name": "damage-amplified",
+    "name": "Damage-Amplified",
     "description": "Increased damage and increased mana cost.",
-    "damage_multiplier": "1.5",
-    "mana_multiplier": "1.5"
+    "damage": {
+        "modifier": "*",
+        "amount": "1.5"
+    },
+    "mana": {
+        "modifier": "*",
+        "amount": "1.5"
+    }
   },
   "speed_amp": {
-    "name": "speed-amplified",
-    "description": "Faster projectile speed",
-    "speed_multiplier": "1.75"
+    "name": "Speed-Amplified",
+    "description": "Faster projectile speed.",
+    "speed": {
+        "modifier": "*",
+        "amount": "1.75"
+    }
   },
   "doubler": {
-    "name": "doubled",
+    "name": "Doubled",
     "description": "Spell is cast a second time after a small delay; increased mana cost and cooldown.",
     "delay": "0.5",
-    "mana_multiplier": "1.5",
-    "cooldown_multiplier": "1.5"
+    "mana": {
+        "modifier": "*",
+        "amount": "1.5"
+    },
+    "cooldown": {
+        "modifier": "*",
+        "amount": "1.5"
+    }
   },
   "splitter": {
-    "name": "split",
+    "name": "Split",
     "description": "Spell is cast twice in slightly different directions; increased mana cost.",
     "angle": "10",
-    "mana_multiplier": "1.5"
+    "mana": {
+        "modifier": "*",
+        "amount": "1.5"
+    }
   },
   "chaos": {
-    "name": "chaotic",
+    "name": "Chaotic",
     "description": "Significantly increased damage, but projectile is spiraling.",
-    "damage_multiplier": "1.5 wave 5 / +",
+    "damage": {
+        "modifier": "*",
+        "amount": "1.5 wave 5 / +"
+    },
     "projectile_trajectory": "spiraling"
   },
   "homing": {
-    "name": "homing",
+    "name": "Homing",
     "description": "Homing projectile, with decreased damage and increased mana cost.",
-    "damage_multiplier": "0.75",
-    "mana_adder": "10",
+    "damage": {
+        "modifier": "*",
+        "amount": "0.75"
+    },
+    "mana": {
+        "modifier": "+",
+        "amount": "10"
+    },
     "projectile_trajectory": "homing"
   },
   "rapid_fire": {
-    "name": "rapid",
+    "name": "Rapid",
     "description": "Reduced cooldown at the cost of increased mana.",
-    "cooldown_multiplier": "0.5",
-    "mana_multiplier": "1.25"
+    "cooldown": {
+        "modifier": "*",
+        "amount": "0.5"
+    },
+    "mana": {
+        "modifier": "*",
+        "amount": "1.25"
+    }
   },
   "cursed": {
-    "name": "cursed",
-    "description": "Funny little thing. Make everything worse lol'",
-    "damage_multiplier": "0.5",
-    "cooldown_multiplier": "1.5"
+    "name": "Cursed",
+    "description": "Funny little thing. Make everything worse lol.",
+    "damage": {
+        "modifier": "*",
+        "amount": "0.5"
+    },
+    "cooldown": {
+        "modifier": "*",
+        "amount": "1.5"
+    }
   },
   "reverse": {
-    "name": "reverse",
-    "description": "Projectile that reverses direction after a certain distance",
-    "cooldown_multiplier": "1.5",
-    "mana_adder": "5",
-    "projectile_trajectory": "reverse"
+    "name": "Reverse",
+    "description": "Projectile reverses direction after a certain distance.",
+    "cooldown": {
+        "modifier": "*",
+        "amount": "1.5"
+    },
+    "mana": {
+        "modifier": "+",
+        "amount": "5"
+    },
+    "projectile_impact": "reverse"
   },
   "slow": {
-    "name": "slow",
-    "description": "Slow but heavy hitting projectiles",
-    "cooldown_multiplier": "1.5",
-    "damage_multiplier": "1.5"
+    "name": "Slow",
+    "description": "Slow but heavy hitting projectiles.",
+    "cooldown": {
+        "modifier": "*",
+        "amount": "1.5"
+    },
+    "damage": {
+        "modifier": "*",
+        "amount": "1.5"
+    }
   }
 }

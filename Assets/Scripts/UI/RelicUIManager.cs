@@ -5,18 +5,6 @@ public class RelicUIManager : MonoBehaviour
     public GameObject relicUIPrefab;
     public PlayerController player;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        //EventBus.Instance.OnRelicPickup += OnRelicPickup;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnRelicPickup(Relic r)
     {
         // make a new Relic UI representation

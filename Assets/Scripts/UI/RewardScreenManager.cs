@@ -48,13 +48,13 @@ public class RewardScreenManager : MonoBehaviour
         mana.text = offeredSpell.GetManaCost().ToString();
         damage.text = offeredSpell.GetDamage().ToString();
         spellName.text = offeredSpell.GetName();
-        //description.text = offeredSpell.GetDescription();
+        description.text = offeredSpell.GetDescription();
         getSpellButton.SetActive(true);
 
 
         if (GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.spells.Count == 4)
         {
-            spellsUI.GetComponent<SpellUIContainer>().showDropButtons();
+            spellsUI.GetComponent<SpellUIContainer>().ShowDropButtons();
         }
 
         if (GameManager.Instance.GetWave() % 3 == 0) ShowRelics();
@@ -72,7 +72,7 @@ public class RewardScreenManager : MonoBehaviour
 
     public void ShowRelics()
     {
-        int availableRelics = Math.Min(3, relicManager.relicsLeft());
+        int availableRelics = Math.Min(3, relicManager.RelicsLeft());
         float spacingX = 300f;
         float startX = -((availableRelics - 1) * spacingX) / 2f;
         float currentX = startX;

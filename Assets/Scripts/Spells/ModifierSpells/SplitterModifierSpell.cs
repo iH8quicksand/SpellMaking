@@ -1,26 +1,28 @@
 using UnityEngine;
 using System.Collections;
+using Newtonsoft.Json.Linq;
 
 public class SplitterModifierSpell : ModifierSpell
 {
-    private string prefix;
-    private float splitAngle;
+    private string splitAngleRPN;
 
     // The constructor takes in the angle from the JSON
-    public SplitterModifierSpell(SpellCaster owner, Spell innerSpell, string prefix, float splitAngle) 
-        : base(owner, innerSpell)
+    public SplitterModifierSpell(SpellCaster owner, Spell innerSpell) : base(owner, innerSpell) { }
+
+    public override void SetAttributes(JObject attributes)
     {
-        this.prefix = prefix;
-        this.splitAngle = splitAngle;
+        base.SetAttributes(attributes);
+        if (attributes["angle"] != null) splitAngleRPN = attributes["angle"].ToString();
     }
 
     public override IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team)
     {
         // 1. Get the original straight direction
         Vector3 direction = target - where;
-        
+
         // 2. We want to split the angle from the JSON in half so it's perfectly symmetrical
-        float halfAngle = this.splitAngle / 2f; 
+        float splitAngle = RPNEvaluator.RPNEvaluator.Evaluatef(splitAngleRPN, GetRPNDict());
+        float halfAngle = splitAngle / 2f;
         
         // 3. Calculate the two new directions by rotating the original direction around the Z-axis
         Vector3 leftDir = Quaternion.Euler(0, 0, halfAngle) * direction;
@@ -38,10 +40,5 @@ public class SplitterModifierSpell : ModifierSpell
         // rather than waiting for the first coroutine to entirely finish before shooting the second.
         GameManager.Instance.projectileManager.StartCoroutine(innerSpell.Cast(currentPos, targetOne, team));
         yield return innerSpell.Cast(currentPos, targetTwo, team);
-    }
-
-    public override string GetName()
-    {
-        return prefix + " " + innerSpell.GetName();
     }
 }

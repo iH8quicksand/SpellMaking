@@ -1,10 +1,13 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using static RPNEvaluator.RPNEvaluator;
 
@@ -24,6 +27,7 @@ public class PlayerController : MonoBehaviour
     
     public bool dead = false;
 
+
     private PlayerClass playerClass;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,8 +36,10 @@ public class PlayerController : MonoBehaviour
         unit = GetComponent<Unit>();
         GameManager.Instance.player = gameObject;
 
-        spellcaster = new SpellCaster(125, 8, 10, Hittable.Team.PLAYER);
-        spellcaster.transform = this.transform;
+        spellcaster = new SpellCaster(125, 8, 10, Hittable.Team.PLAYER)
+        {
+            transform = this.transform
+        };
         StartCoroutine(spellcaster.ManaRegeneration());
         EventBus.Instance.GainMana += spellcaster.GainMana;
         EventBus.Instance.GainSpellPower += spellcaster.GainSpellPower;
@@ -57,28 +63,23 @@ public class PlayerController : MonoBehaviour
     public void UpdatePlayerClass(PlayerClass pc)
     {
         playerClass = pc;
-        GameManager.Instance.playerSpriteManager.PlaceSprite(pc.sprite, spriteRenderer);
+        GameManager.Instance.playerSpriteManager.PlaceSprite(pc.Sprite, spriteRenderer);
     }
 
     public void UpdatePlayerStats(int wave)
     {
-        Dictionary<string,int> RPNDict = new Dictionary<string, int> { { "wave", wave } };
-        hp.SetMaxHP(Evaluate(playerClass.health, RPNDict));
-        spellcaster.max_mana = Evaluate(playerClass.mana, RPNDict);
-        spellcaster.mana_reg = Evaluate(playerClass.mana_regeneration, RPNDict);
-        spellcaster.spell_power = Evaluate(playerClass.spellpower, RPNDict);
-        speed = Evaluate(playerClass.speed, RPNDict);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (dead) Die();
+        Dictionary<string,int> RPNDict = new() { { "wave", wave } };
+        hp.SetMaxHP(Evaluate(playerClass.Health, RPNDict));
+        spellcaster.max_mana = Evaluate(playerClass.Mana, RPNDict);
+        spellcaster.mana_reg = Evaluate(playerClass.Mana_Regeneration, RPNDict);
+        spellcaster.spell_power = Evaluate(playerClass.Spellpower, RPNDict);
+        speed = Evaluate(playerClass.Speed, RPNDict);
     }
 
     void OnAttack(InputValue value)
     {
-        if (GameManager.Instance.state == GameManager.GameState.PREGAME || GameManager.Instance.state == GameManager.GameState.GAMEOVER) return;
+        if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         Vector2 mouseScreen = Mouse.current.position.value;
         Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
         mouseWorld.z = 0;
@@ -87,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        if (GameManager.Instance.state == GameManager.GameState.PREGAME || GameManager.Instance.state == GameManager.GameState.GAMEOVER) return;
+        if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
         unit.movement = value.Get<Vector2>()*speed;
     }
 

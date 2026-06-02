@@ -8,6 +8,7 @@ public class WaveLabelController : MonoBehaviour
     void Start()
     {
         tmp = GetComponent<TextMeshProUGUI>();
+        tmp.enabled = false;
     }
 
     // Update is called once per frame
@@ -15,10 +16,11 @@ public class WaveLabelController : MonoBehaviour
     {
         if (GameManager.Instance.state == GameManager.GameState.INWAVE)
         {
-            tmp.text = "Enemies left: " + GameManager.Instance.enemy_count;
+            tmp.text = "Enemies left: " + GameManager.Instance.Enemy_Count;
         }
         if (GameManager.Instance.state == GameManager.GameState.COUNTDOWN)
         {
+            tmp.enabled = true;
             tmp.text = "Starting in " + GameManager.Instance.countdown;
         }
     }

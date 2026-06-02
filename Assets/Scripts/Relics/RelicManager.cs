@@ -30,7 +30,7 @@ public class RelicManager
         relicPool.RemoveAt(index);
         return relic;
     }
-    public int relicsLeft()
+    public int RelicsLeft()
     {
         return relicPool.Count;
     }
@@ -53,7 +53,7 @@ public class RelicManager
         relicPool.Remove(relic);
         EventBus eb = EventBus.Instance;
         //Register trigger as subscriber to its event
-        switch(relic.trigger.type)
+        switch(relic.Trigger.Type)
         {
             case "take-damage":
                 eb.OnDamage += (_, _, target) => {
@@ -75,13 +75,13 @@ public class RelicManager
                 break;
         }
         //Register effect "until"s as subscribers to their events
-        switch(relic.effect.until)
+        switch(relic.Effect.Until)
         {
             case "move":
-                eb.OnMove += relic.effect.ReadyUp;
+                eb.OnMove += relic.Effect.ReadyUp;
                 break;
             case "cast-spell":
-                eb.OnCastSpell += relic.effect.ReadyUp;
+                eb.OnCastSpell += relic.Effect.ReadyUp;
                 break;
         }
     }

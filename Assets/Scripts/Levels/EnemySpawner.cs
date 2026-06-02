@@ -20,10 +20,10 @@ public class EnemySpawner : MonoBehaviour
     public GameObject button;
     public GameObject playerClassPrefab;
     public GameObject enemy;
-    public SpawnPoint[] SpawnPoints; 
-    Dictionary<string, Enemy> enemy_types = new Dictionary<string, Enemy>(); 
-    Dictionary<string, Level> level_types = new Dictionary<string, Level>(); 
-    Dictionary<string, PlayerClass> class_types = new Dictionary<string, PlayerClass>(); 
+    public SpawnPoint[] SpawnPoints;
+    private readonly Dictionary<string, Enemy> enemy_types = new(); 
+    private readonly Dictionary<string, Level> level_types = new(); 
+    private Dictionary<string, PlayerClass> class_types = new(); 
     public string currentLevelname;
     public int wave_count;
     public int delay = 2;
@@ -32,9 +32,9 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         LoadEnemyType();
-        LoadLevelType(); 
+        LoadLevelType();
+        level_selector.gameObject.SetActive(true);
         // loop through levels and add a button for each difficulty
-        
         int totalLevels = level_types.Count;
         float spacing = 50f;
         float startY = ((totalLevels - 1) * spacing) / 2f;
@@ -63,12 +63,6 @@ public class EnemySpawner : MonoBehaviour
             currentX += spacingX;
         }
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void SelectLevel(string levelname)
@@ -118,7 +112,7 @@ public class EnemySpawner : MonoBehaviour
             Spawn spawn = currentLevel.spawns[i];
             Enemy enemy_data = enemy_types[spawn.enemy];
             
-            SetPerameters parameters =  new SetPerameters // saves the parameters to the builder class to get later.
+            SetPerameters parameters =  new()
             {
                 type = spawn.enemy,
                 hp = Evaluate(spawn.hp, new Dictionary<string, int> {{ "base", enemy_data.hp }, { "wave", wave_count }}),
@@ -161,7 +155,7 @@ public class EnemySpawner : MonoBehaviour
             }
 
         }
-        yield return new WaitWhile(() => GameManager.Instance.enemy_count > 0);
+        yield return new WaitWhile(() => GameManager.Instance.Enemy_Count > 0);
         GameManager.Instance.state = GameManager.GameState.WAVEEND;
         EventBus.Instance.Broadcast_WaveEnd();
     }
@@ -255,7 +249,7 @@ public class EnemySpawner : MonoBehaviour
     {
         GameManager.Instance.state = GameManager.GameState.PREGAME;
         StopAllCoroutines(); // stop SpawnWave from finishing
-        GameManager.Instance.ResetEnemyCount();
+        GameManager.Instance.ResetEnemies();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
