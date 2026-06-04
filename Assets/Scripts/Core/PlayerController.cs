@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
     void OnAttack(InputValue value)
     {
         if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
-        if (EventSystem.current.IsPointerOverGameObject()) return;
+        //if (EventSystem.current.IsPointerOverGameObject()) return; //<-- Doesn't matter in 3D since cursor is always centered
         StartCoroutine(spellcaster.Cast(transform));
     }
 

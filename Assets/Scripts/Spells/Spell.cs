@@ -239,6 +239,7 @@ public class Spell
         return impact.ToString() switch
         {
             "reverse" => Projectile.ImpactMod.REVERSE,
+            "bounce" => Projectile.ImpactMod.BOUNCE,
             _ => Projectile.ImpactMod.DIE,
         };
     }

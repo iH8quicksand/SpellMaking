@@ -16,7 +16,7 @@ public class SpellBuilder
     /// <param name="specificSpellKey">If you want to make a specific base spell, its key would go here.</param>
     /// <param name="specificModCount">If you want a certain number of Modifiers on the spell, you can specify that here.</param>
     /// <returns>The new <see cref="Spell"/>!</returns>
-    public static Spell Build(SpellCaster owner, string specificSpellKey=null, int specificModCount=-1)
+    public static Spell Build(SpellCaster owner, string specificSpellKey=null, int specificModCount=-1, string specificModKey=null)
     {
         // --- 1. GRAB THE DICTIONARIES ---
         var baseDict = GameManager.Instance.spellManager.baseSpells; //base spell data
@@ -42,7 +42,20 @@ public class SpellBuilder
         // Every spell gets between 1 and 3 random modifiers (or the pre-set number)
         int numModifiers = (specificModCount > -1) ? specificModCount : Random.Range(1, 4);
         if (numModifiers == 0) return mySpell;
-        
+
+        //Force ModifierSpell
+        if (specificModKey != null)
+        {
+            mySpell = specificModKey switch
+            {
+                "doubler" => new DoublerModifier(owner, mySpell),
+                "splitter" => new SplitterModifierSpell(owner, mySpell),
+                _ => new ModifierSpell(owner, mySpell),
+            };
+            mySpell.SetAttributes(modDict[specificModKey]);
+            return mySpell;
+        }
+
         // --- 4. APPLY THE RANDOM MODIFIERS ---
         // Get a List of all the Modifier Spell keys
         List<string> modKeys = new(modDict.Keys);

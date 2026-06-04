@@ -32,7 +32,7 @@ public class SpellCaster
         this.team = team;
         spells = new List<Spell>
         {
-            SpellBuilder.Build(this, "arcane_bolt", 0)
+            SpellBuilder.Build(this, "arcane_bolt", specificModCount:0)
         };
         equippedSpellIndex = 0;
         EventBus.Instance.AddSpell += AddSpell;

@@ -7,7 +7,7 @@ public class HomingTrajectory : Trajectory
     public HomingTrajectory(float speed) : base(speed)
     {
         angle = float.NaN;
-        turn_rate = 0.25f;
+        turn_rate = 0.25f;//max degrees turn per Update() frame
     }
 
     public override void Movement(Transform transform)
@@ -15,7 +15,7 @@ public class HomingTrajectory : Trajectory
         if (float.IsNaN(angle))
         {
             Vector3 direction = transform.rotation * new Vector3(0, 0, 1);
-            angle = Mathf.Atan2(direction.y, direction.x);
+            angle = Mathf.Atan2(direction.z, direction.x);
         }
         GameObject closest = GameManager.Instance.GetClosestEnemy(transform.position);
         if (closest == null)
@@ -24,7 +24,7 @@ public class HomingTrajectory : Trajectory
             angle = Mathf.Atan2(direction.z, direction.x);
             transform.Translate(new Vector3(0, 0, speed * Time.deltaTime), Space.Self);
         }
-        else
+        else //we have the angle (in the xz plane) of where the projectile is currently heading, and we have the closest enemy
         {
             Vector3 new_direction = (closest.transform.position - transform.position).normalized;
             float new_angle = Mathf.Atan2(new_direction.z, new_direction.x);
