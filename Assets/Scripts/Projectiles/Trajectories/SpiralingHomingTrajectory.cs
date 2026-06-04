@@ -14,8 +14,8 @@ public class SpiralingHomingTrajectory : Trajectory
 
     public override void Movement(Transform transform)
     {
-        transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0), Space.Self);
-        transform.Rotate(0, 0, speed *Mathf.Sqrt(speed)* Time.deltaTime*20.0f/(1 + Random.value + Time.time - start));
+        transform.Translate(new Vector3(0, 0, speed * Time.deltaTime), Space.Self);
+        transform.Rotate(0, speed * Mathf.Sqrt(speed) * Time.deltaTime * 20.0f / (1 + Random.value + Time.time - start), 0);
 
         if (float.IsNaN(angle))
         {
@@ -47,7 +47,7 @@ public class SpiralingHomingTrajectory : Trajectory
                 angle += Mathf.Clamp(da, -turn_rate * Mathf.Deg2Rad, turn_rate * Mathf.Deg2Rad);
 
             }
-            Vector3 direction = new(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+            Vector3 direction = new(Mathf.Cos(angle), 0, Mathf.Sin(angle));
             transform.Translate(speed * Time.deltaTime * direction.normalized, Space.World);
         }
     }

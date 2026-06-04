@@ -14,20 +14,20 @@ public class HomingTrajectory : Trajectory
     {
         if (float.IsNaN(angle))
         {
-            Vector3 direction = transform.rotation * new Vector3(1, 0, 0);
+            Vector3 direction = transform.rotation * new Vector3(0, 0, 1);
             angle = Mathf.Atan2(direction.y, direction.x);
         }
         GameObject closest = GameManager.Instance.GetClosestEnemy(transform.position);
         if (closest == null)
         {
-            Vector3 direction = transform.rotation * new Vector3(1, 0, 0);
-            angle = Mathf.Atan2(direction.y, direction.x);
-            transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0), Space.Self);
+            Vector3 direction = transform.rotation * new Vector3(0, 0, 1);
+            angle = Mathf.Atan2(direction.z, direction.x);
+            transform.Translate(new Vector3(0, 0, speed * Time.deltaTime), Space.Self);
         }
         else
         {
             Vector3 new_direction = (closest.transform.position - transform.position).normalized;
-            float new_angle = Mathf.Atan2(new_direction.y, new_direction.x);
+            float new_angle = Mathf.Atan2(new_direction.z, new_direction.x);
             if (Mathf.Abs(angle - new_angle) > Mathf.Epsilon)
             {
                 float da = new_angle - angle;
@@ -42,7 +42,7 @@ public class HomingTrajectory : Trajectory
                 angle += Mathf.Clamp(da, -turn_rate * Mathf.Deg2Rad, turn_rate * Mathf.Deg2Rad);
 
             }
-            Vector3 direction = new(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+            Vector3 direction = new(Mathf.Cos(angle), 0, Mathf.Sin(angle));
             transform.Translate(speed * Time.deltaTime * direction.normalized, Space.World);
         }
     }

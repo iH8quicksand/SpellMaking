@@ -23,14 +23,17 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         Vector3 direction = target.position - transform.position;
-        if (direction.magnitude < 2f)
+        Vector2 direction2 = new(direction.x, direction.z);
+        if (direction2.magnitude < 2f)
         {
             DoAttack();
         }
         else
         {
-            GetComponent<Unit>().movement = direction.normalized * speed;
+            GetComponent<Unit>().movement = direction2.normalized * speed;
         }
+        transform.LookAt(target);
+        transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
     }
     
     void DoAttack()

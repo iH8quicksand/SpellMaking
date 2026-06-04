@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using static RPNEvaluator.RPNEvaluator;
 
 public class PlayerController : MonoBehaviour
@@ -26,6 +27,10 @@ public class PlayerController : MonoBehaviour
     public Unit unit;
     
     public bool dead = false;
+
+    public GameObject cam;
+    public float sensitivity = 0.1f;
+    public InputActionReference SetSpell;
 
 
     private PlayerClass playerClass;
@@ -53,6 +58,8 @@ public class PlayerController : MonoBehaviour
         healthui.SetHealth(hp);
         manaui.SetSpellCaster(spellcaster);
         spellui.SetSpell(spellcaster.spells[0]);
+
+        SetSpell.action.started += TrySetSpell;
     }
 
     public void StartLevel()
@@ -80,16 +87,43 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        Vector2 mouseScreen = Mouse.current.position.value;
-        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
-        mouseWorld.z = 0;
-        StartCoroutine(spellcaster.Cast(transform.position, mouseWorld));
+        StartCoroutine(spellcaster.Cast(transform));
     }
 
     void OnMove(InputValue value)
     {
         if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
         unit.movement = value.Get<Vector2>()*speed;
+    }
+
+    void OnLook(InputValue value)
+    {
+        if (GameManager.Instance.state != GameManager.GameState.INWAVE && GameManager.Instance.state != GameManager.GameState.COUNTDOWN)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            return;
+        }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Vector2 lookVector = value.Get<Vector2>();
+        Vector3 rotation = cam.transform.rotation.eulerAngles;
+        float rotationX = rotation.x - lookVector.y * sensitivity;
+        if (rotationX > 90f && rotationX <= 270f) rotationX = (180f - rotationX >= 0) ? 90f : 270f;
+        cam.transform.rotation = Quaternion.Euler(rotationX, rotation.y, rotation.z);
+        transform.Rotate(Vector3.up * lookVector.x * sensitivity);
+    }
+
+    void OnJump(InputValue value)
+    {
+        if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
+        unit.Jump();
+    }
+
+    void TrySetSpell(InputAction.CallbackContext context)
+    {
+        int index = int.Parse(context.control.name) - 1;
+        if (index < spellcaster.spells.Count) EventBus.Instance.Broadcast_SetSpell(index);
     }
 
     void Die()

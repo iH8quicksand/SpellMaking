@@ -9,6 +9,7 @@ public class Unit : MonoBehaviour
     public float distance;
     private float lastMoved;
     private bool isMoving;
+    private float velocityY = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,8 +20,8 @@ public class Unit : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move(new Vector2(movement.x, 0) * Time.fixedDeltaTime);
-        Move(new Vector2(0, movement.y) * Time.fixedDeltaTime);
+        Move(new Vector3(movement.x, 0, movement.y) * Time.fixedDeltaTime);
+        //Move(new Vector3(0, 0, movement.y) * Time.fixedDeltaTime);
         distance += movement.magnitude*Time.fixedDeltaTime;
         if (isPlayer)
         {
@@ -43,16 +44,27 @@ public class Unit : MonoBehaviour
                 //Debug.Log("hasn't been moving for 3 seconds");
             }
         }
+        if (velocityY > 0f)
+        {
+            transform.Translate(new Vector3(0f, velocityY, 0f));
+            velocityY -= 0.01f;
+        }
+        if (velocityY < 0f) velocityY = 0f;
+
     }
 
-    public void Move(Vector2 ds)
+    public void Move(Vector3 movementVector)
     {
-        List<RaycastHit2D> hits = new();
-        int n = GetComponent<Rigidbody2D>().Cast(ds, hits, ds.magnitude * 2);
-        if (n == 0)
+        bool isHit = GetComponent<Rigidbody>().SweepTest(movementVector, out RaycastHit hit, movementVector.magnitude * 2);
+        if (!isHit)
         {
-            transform.Translate(ds);
+            transform.Translate(movementVector);
         }
+    }
+
+    public void Jump()
+    {
+        velocityY = 0.2f;
     }
 
 

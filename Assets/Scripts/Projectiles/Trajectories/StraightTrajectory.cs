@@ -9,6 +9,6 @@ public class StraightTrajectory : Trajectory
 
     public override void Movement(Transform transform)
     {
-        transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0), Space.Self);
+        transform.Translate(new Vector3(0, 0, speed * Time.deltaTime), Space.Self);
     }
 }

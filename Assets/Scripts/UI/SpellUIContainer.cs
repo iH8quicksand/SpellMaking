@@ -19,6 +19,7 @@ public class SpellUIContainer : MonoBehaviour
         EventBus.Instance.AddSpell += AddSpell;
         EventBus.Instance.RemoveSpell += RemoveSpell;
         EventBus.Instance.WaveStart += HideDropButtons;
+        EventBus.Instance.SetSpell += SetSpellTooltip;
         spellTooltip.text = "";
     }
 

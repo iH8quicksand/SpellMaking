@@ -55,12 +55,13 @@ public class SpellCaster
         if (equippedSpellIndex >= index) equippedSpellIndex--;
     }
 
-    public IEnumerator Cast(Vector3 where, Vector3 target)
+    public IEnumerator Cast(Transform playerTransform)
     {
         if (mana >= spells[equippedSpellIndex].GetManaCost() && spells[equippedSpellIndex].IsReady())
         {
             mana -= spells[equippedSpellIndex].GetManaCost();
-            yield return spells[equippedSpellIndex].Cast(where, target, team);
+            Vector3 targetDirection = playerTransform.Find("Main Camera").rotation * Vector3.forward;
+            yield return spells[equippedSpellIndex].Cast(playerTransform.position, playerTransform.position + targetDirection, team);
         }
         yield break;
     }

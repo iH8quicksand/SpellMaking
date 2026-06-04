@@ -25,8 +25,8 @@ public class SplitterModifierSpell : ModifierSpell
         float halfAngle = splitAngle / 2f;
         
         // 3. Calculate the two new directions by rotating the original direction around the Z-axis
-        Vector3 leftDir = Quaternion.Euler(0, 0, halfAngle) * direction;
-        Vector3 rightDir = Quaternion.Euler(0, 0, -halfAngle) * direction;
+        Vector3 leftDir = Quaternion.Euler(0, halfAngle, 0) * direction;
+        Vector3 rightDir = Quaternion.Euler(0, -halfAngle, 0) * direction;
         
         // 4. Get the live position of the caster to avoid the "outrunning the gun" bug!
         Vector3 currentPos = owner.transform.position;

@@ -13,6 +13,6 @@ public class SpawnPoint : MonoBehaviour
     public Vector3 GetRandomPosition()
     {
         Vector2 offset = Random.insideUnitCircle * spawnRadius;
-        return transform.position + new Vector3(offset.x, offset.y, 0);
+        return transform.position + new Vector3(offset.x, 0, offset.y);
     }
 }

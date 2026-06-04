@@ -188,6 +188,7 @@ public class EnemySpawner : MonoBehaviour
         //Debug.Log($"Spawning {parameters.type} at {spawn_point.name} | position: {spawn_point.transform.position}");
 
         Vector3 initial_position = spawn_point.GetRandomPosition();
+        initial_position = new(initial_position.x, 0f, initial_position.z);
 
         GameObject new_enemy = Instantiate(enemy, initial_position, Quaternion.identity);
         

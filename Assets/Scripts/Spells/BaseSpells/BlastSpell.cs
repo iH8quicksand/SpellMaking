@@ -66,7 +66,7 @@ public class BlastSpell : Spell
             for (int i = 0; i < N; i++)
             {
                 angle = i * 360d / N * Math.PI/180d;
-                target = new Vector3((float)(pc.transform.position.x + Math.Cos(angle)), (float)(pc.transform.position.y + Math.Sin(angle)), pc.transform.position.z);
+                target = new Vector3((float)(pc.transform.position.x + Math.Cos(angle)), pc.transform.position.y, (float)(pc.transform.position.z + Math.Sin(angle)));
                 GameManager.Instance.projectileManager.CreateProjectile(GetProjectileSprite2(), GetTrajectory2(), pc.transform.position, target - pc.transform.position, GetSpeed2(), OnHit2, OnProjectileCollision, GetLifetime2(), collisions:1);
             }
             pc.DestroyProjectile();

@@ -15,7 +15,7 @@ public class ProjectileManager : MonoBehaviour
 
     public void CreateProjectile(int which, List<Projectile.TrajectoryMod> trajectories, Vector3 where, Vector3 direction, float speed, Action<Hittable, Vector3> onHit, Action<ProjectileController> onProjectileCollision, float lifetime = 0, int collisions = 0)
     {
-        GameObject new_projectile = Instantiate(projectiles[which], where + direction.normalized * 1.1f, Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg));
+        GameObject new_projectile = Instantiate(projectiles[which], where + direction.normalized * 1.1f + new Vector3(0f,0.5f,0f), Quaternion.LookRotation(direction.normalized));
         new_projectile.GetComponent<ProjectileController>().movement = MakeMovement(trajectories, speed);
         new_projectile.GetComponent<ProjectileController>().OnHit += onHit;
         new_projectile.GetComponent<ProjectileController>().OnProjectileCollision += onProjectileCollision;

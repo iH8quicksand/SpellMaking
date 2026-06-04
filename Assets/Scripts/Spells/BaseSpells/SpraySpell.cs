@@ -38,7 +38,7 @@ public class SpraySpell : Spell
         for (int i=0; i<N; i++)
         {
             projectileAngle = angleToTopOfSpray - (i * sprayAngle / (N-1));//radians; N-1 to get full range of spray
-            projectileTarget = new Vector3((float)(where.x + Math.Cos(projectileAngle)), (float)(where.y + Math.Sin(projectileAngle)), where.z);
+            projectileTarget = new Vector3((float)(where.x + Math.Cos(projectileAngle)), where.y, (float)(where.z + Math.Sin(projectileAngle)));
             yield return base.Cast(where, projectileTarget, team);
         }
     }
