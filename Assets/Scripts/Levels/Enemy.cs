@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Enemy
     {
         public string name;
-        public string prefabLocation;
+        public string prefabKey;
         public int hp;
         public int speed;
         public int damage;

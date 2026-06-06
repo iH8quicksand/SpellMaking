@@ -22,6 +22,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemy;
     public SpawnPoint[] SpawnPoints;
     private readonly Dictionary<string, Enemy> enemy_types = new(); 
+    private  Dictionary<string, GameObject> enemy_prefabs = new();
     private readonly Dictionary<string, Level> level_types = new(); 
     private Dictionary<string, PlayerClass> class_types = new(); 
     public string currentLevelname;
@@ -32,6 +33,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         LoadEnemyType();
+        LoadPrefabLookup();
         LoadLevelType();
         level_selector.gameObject.SetActive(true);
         // loop through levels and add a button for each difficulty
@@ -192,11 +194,11 @@ public class EnemySpawner : MonoBehaviour
         initial_position = new(initial_position.x, 0f, initial_position.z);
 
         Enemy data = enemy_types[parameters.type];
-        GameObject enemy_prefab = Resources.Load<GameObject>(data.prefabLocation); // load the prefab of the name
+        string key = data.prefabKey.Trim().ToLower();
 
-        if (enemy_prefab == null) 
+        if (!enemy_prefabs.TryGetValue(key, out GameObject enemy_prefab))
         {
-            Debug.LogError($"Could not load prefab: {data.prefabLocation}");
+            Debug.LogError($"Missing prefab mapping for: {key}");
             return;
         }
 
@@ -217,6 +219,13 @@ public class EnemySpawner : MonoBehaviour
             Enemy en = enemy.ToObject<Enemy>();
             enemy_types[en.name] = en;
         }
+    }
+
+    public void LoadPrefabLookup()
+    {
+        enemy_prefabs = new Dictionary<string, GameObject>();
+
+        enemy_prefabs["ant"] = Resources.Load<GameObject>("Ant");
     }
 
     public void LoadLevelType()
