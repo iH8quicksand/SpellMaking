@@ -14,8 +14,7 @@ public class ManaBar : MonoBehaviour
         float perc = sc.mana * 1.0f / sc.max_mana;
         if (Mathf.Abs(old_perc - perc) > 0.01f)
         {
-            slider.transform.localScale = new Vector3(perc, 1, 1);
-            slider.transform.localPosition = new Vector3(-(1 - perc) / 2, 0, 0);
+            slider.GetComponent<RectTransform>().offsetMax = new Vector2(-Mathf.Lerp(450f, 150f, perc), 25f);
             old_perc = perc;
         }
     }

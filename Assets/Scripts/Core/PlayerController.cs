@@ -15,9 +15,9 @@ using static RPNEvaluator.RPNEvaluator;
 public class PlayerController : MonoBehaviour
 {
     public Hittable hp;
-    public HealthBar healthui;
+    public PlayerHealthBar healthui;
     public ManaBar manaui;
-    public SpriteRenderer spriteRenderer;
+    //public SpriteRenderer spriteRenderer;
 
     public SpellCaster spellcaster;
     public SpellUI spellui;
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     public void UpdatePlayerClass(PlayerClass pc)
     {
         playerClass = pc;
-        GameManager.Instance.playerSpriteManager.PlaceSprite(pc.Sprite, spriteRenderer);
+        //GameManager.Instance.playerSpriteManager.PlaceSprite(pc.Sprite, spriteRenderer);
     }
 
     public void UpdatePlayerStats(int wave)
