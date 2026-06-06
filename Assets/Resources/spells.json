@@ -78,20 +78,20 @@
     "name": "Damage-Amplified",
     "description": "Increased damage and increased mana cost.",
     "damage": {
-        "modifier": "*",
-        "amount": "1.5"
+      "modifier": "*",
+      "amount": "1.5"
     },
     "mana": {
-        "modifier": "*",
-        "amount": "1.5"
+      "modifier": "*",
+      "amount": "1.5"
     }
   },
   "speed_amp": {
     "name": "Speed-Amplified",
     "description": "Faster projectile speed.",
     "speed": {
-        "modifier": "*",
-        "amount": "1.75"
+      "modifier": "*",
+      "amount": "1.75"
     }
   },
   "doubler": {
@@ -99,12 +99,12 @@
     "description": "Spell is cast a second time after a small delay; increased mana cost and cooldown.",
     "delay": "0.5",
     "mana": {
-        "modifier": "*",
-        "amount": "1.5"
+      "modifier": "*",
+      "amount": "1.5"
     },
     "cooldown": {
-        "modifier": "*",
-        "amount": "1.5"
+      "modifier": "*",
+      "amount": "1.5"
     }
   },
   "splitter": {
@@ -112,16 +112,16 @@
     "description": "Spell is cast twice in slightly different directions; increased mana cost.",
     "angle": "10",
     "mana": {
-        "modifier": "*",
-        "amount": "1.5"
+      "modifier": "*",
+      "amount": "1.5"
     }
   },
   "chaos": {
     "name": "Chaotic",
     "description": "Significantly increased damage, but projectile is spiraling.",
     "damage": {
-        "modifier": "*",
-        "amount": "1.5 wave 5 / +"
+      "modifier": "*",
+      "amount": "1.5 wave 5 / +"
     },
     "projectile_trajectory": "spiraling"
   },
@@ -129,12 +129,12 @@
     "name": "Homing",
     "description": "Homing projectile, with decreased damage and increased mana cost.",
     "damage": {
-        "modifier": "*",
-        "amount": "0.75"
+      "modifier": "*",
+      "amount": "0.75"
     },
     "mana": {
-        "modifier": "+",
-        "amount": "10"
+      "modifier": "+",
+      "amount": "10"
     },
     "projectile_trajectory": "homing"
   },
@@ -142,36 +142,36 @@
     "name": "Rapid",
     "description": "Reduced cooldown at the cost of increased mana.",
     "cooldown": {
-        "modifier": "*",
-        "amount": "0.5"
+      "modifier": "*",
+      "amount": "0.5"
     },
     "mana": {
-        "modifier": "*",
-        "amount": "1.25"
+      "modifier": "*",
+      "amount": "1.25"
     }
   },
   "cursed": {
     "name": "Cursed",
     "description": "Funny little thing. Make everything worse lol.",
     "damage": {
-        "modifier": "*",
-        "amount": "0.5"
+      "modifier": "*",
+      "amount": "0.5"
     },
     "cooldown": {
-        "modifier": "*",
-        "amount": "1.5"
+      "modifier": "*",
+      "amount": "1.5"
     }
   },
   "reverse": {
     "name": "Reverse",
     "description": "Projectile reverses direction after a certain distance.",
     "cooldown": {
-        "modifier": "*",
-        "amount": "1.5"
+      "modifier": "*",
+      "amount": "1.5"
     },
     "mana": {
-        "modifier": "+",
-        "amount": "5"
+      "modifier": "+",
+      "amount": "5"
     },
     "projectile_impact": "reverse"
   },
@@ -179,17 +179,17 @@
     "name": "Slow",
     "description": "Slow but heavy hitting projectiles.",
     "cooldown": {
-        "modifier": "*",
-        "amount": "1.5"
+      "modifier": "*",
+      "amount": "1.5"
     },
     "damage": {
-        "modifier": "*",
-        "amount": "1.5"
+      "modifier": "*",
+      "amount": "1.5"
     }
   },
   "bounce": {
-      "name": "Bouncy",
-      "description": "Projectile will bounce off of objects like a bouncy ball!",
-      "projectile_impact": "bounce"
+    "name": "Bouncy",
+    "description": "Projectile will bounce off of objects like a bouncy ball!",
+    "projectile_impact": "bounce"
   }
 }
