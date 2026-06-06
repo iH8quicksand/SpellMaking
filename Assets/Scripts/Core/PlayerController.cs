@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public Hittable hp;
     public HealthBar healthui;
     public ManaBar manaui;
-    public SpriteRenderer spriteRenderer;
+    //public SpriteRenderer spriteRenderer;
 
     public SpellCaster spellcaster;
     public SpellUI spellui;
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     public void UpdatePlayerClass(PlayerClass pc)
     {
         playerClass = pc;
-        GameManager.Instance.playerSpriteManager.PlaceSprite(pc.Sprite, spriteRenderer);
+        //GameManager.Instance.playerSpriteManager.PlaceSprite(pc.Sprite, spriteRenderer);
     }
 
     public void UpdatePlayerStats(int wave)
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
         //if (EventSystem.current.IsPointerOverGameObject()) return; //<-- Doesn't matter in 3D since cursor is always centered
-        StartCoroutine(spellcaster.Cast(transform));
+        StartCoroutine(spellcaster.Cast(cam.transform));
     }
 
     void OnMove(InputValue value)

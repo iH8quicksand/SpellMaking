@@ -48,6 +48,7 @@ public class ProjectileController : MonoBehaviour
                 OnHit(pc.hp, transform.position);
             }
         }
+        Debug.Log(collision.gameObject.name);
         OnProjectileCollision(this);
     }
 

@@ -55,11 +55,11 @@ public class Unit : MonoBehaviour
 
     public void Move(Vector3 movementVector)
     {
-        bool isHit = GetComponent<Rigidbody>().SweepTest(movementVector, out RaycastHit hit, movementVector.magnitude * 2);
-        if (!isHit)
-        {
+        //bool isHit = GetComponent<Rigidbody>().SweepTest(movementVector, out RaycastHit hit, movementVector.magnitude * 2);
+        //if (!isHit)
+        //{
             transform.Translate(movementVector);
-        }
+        //}
     }
 
     public void Jump()
