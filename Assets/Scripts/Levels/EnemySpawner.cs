@@ -110,6 +110,7 @@ public class EnemySpawner : MonoBehaviour
         {
             
             Spawn spawn = currentLevel.spawns[i];
+            Debug.Log($"Spawn request: {spawn.enemy}");
             Enemy enemy_data = enemy_types[spawn.enemy];
             
             SetPerameters parameters =  new()
@@ -190,11 +191,17 @@ public class EnemySpawner : MonoBehaviour
         Vector3 initial_position = spawn_point.GetRandomPosition();
         initial_position = new(initial_position.x, 0f, initial_position.z);
 
-        GameObject new_enemy = Instantiate(enemy, initial_position, Quaternion.identity);
-        
-        Enemy data = enemy_types[parameters.type];                                   // get the name of the enemy to are makeing
-        new_enemy.GetComponent<SpriteRenderer>().sprite = GameManager.Instance
-                                     .enemySpriteManager.Get(data.sprite);           // assign the sprite of the name
+        Enemy data = enemy_types[parameters.type];
+        GameObject enemy_prefab = Resources.Load<GameObject>(data.prefabLocation); // load the prefab of the name
+
+        if (enemy_prefab == null) 
+        {
+            Debug.LogError($"Could not load prefab: {data.prefabLocation}");
+            return;
+        }
+
+        GameObject new_enemy = Instantiate(enemy_prefab, initial_position, Quaternion.identity); // create the enemy in the game
+
         new_enemy.GetComponent<EnemyController>().SetParameters(parameters);         // assign the contoller to the name and parameters
                                                         // function in enemycontroller
         GameManager.Instance.AddEnemy(new_enemy);                                    // creat the enemy in the game
