@@ -21,8 +21,8 @@
        "damage": 10
    },
    {
-       "name": "cockrock",
-       "prefabKey": "Cockrock",
+       "name": "toad",
+       "prefabKey": "Toad",
        "hp": 200,
        "speed": 5,
        "damage": 30

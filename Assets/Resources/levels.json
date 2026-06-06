@@ -25,7 +25,7 @@
                 "location": "random red"
             }, 
             {
-                "enemy": "cockroach",
+                "enemy": "toad",
                 "count": "0 wave +",
                 "hp": "100 70 wave * +",
                 "delay": "10",
@@ -103,7 +103,7 @@
                 "location": "random bone"
             },
             {
-               "enemy": "cockroach",
+               "enemy": "toad",
                "count": "1 wave +",
                "hp": "100 70 wave * +",
                "delay": "10",
