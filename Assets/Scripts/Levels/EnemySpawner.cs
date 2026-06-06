@@ -226,6 +226,7 @@ public class EnemySpawner : MonoBehaviour
         enemy_prefabs = new Dictionary<string, GameObject>();
 
         enemy_prefabs["ant"] = Resources.Load<GameObject>("Ant");
+        enemy_prefabs["rat"] = Resources.Load<GameObject>("Rat");
     }
 
     public void LoadLevelType()
