@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8861610274469844063}
   - component: {fileID: 2719929249088564145}
   m_Layer: 0
-  m_Name: ArcaneBoltPrefab 2
+  m_Name: ArcaneBlast
   m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +199,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8392039889564100474}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 16add6b7c66a7bd4daca9326429a5a3a, type: 2}
   m_CullingMode: 0

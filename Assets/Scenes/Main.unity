@@ -12059,6 +12059,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectiles:
   - {fileID: 5974830082219523945, guid: f34a30cd4de40054fbf581a2defa05b3, type: 3}
+  - {fileID: 5974830082219523945, guid: e9cda1bc8b97a07448e5df63212a6180, type: 3}
+  - {fileID: 5974830082219523945, guid: 9a98940a90f3b9e4695a267252ef3715, type: 3}
+  - {fileID: 5974830082219523945, guid: 24fd68d917ba64d499aad9da4d383a61, type: 3}
 --- !u!1 &1807847392
 GameObject:
   m_ObjectHideFlags: 0

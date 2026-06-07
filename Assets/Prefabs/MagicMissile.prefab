@@ -199,9 +199,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8392039889564100474}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 16add6b7c66a7bd4daca9326429a5a3a, type: 2}
+  m_Controller: {fileID: 9100000, guid: c9186a2ecddb2984fb622c29abefa4ba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -221,9 +221,41 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 587294980473759588}
     m_Modifications:
+    - target: {fileID: 2005126039532651950, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2823568466146214680, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
       propertyPath: m_Name
       value: nc-Orb8-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3097880516472298624, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594074631645841710, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594074631645841710, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594074631645841710, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594074631645841710, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594074631645841710, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5594074631645841710, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5950252699540545265, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
       propertyPath: m_LocalScale.x
@@ -299,6 +331,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8093920708218412076, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220027365733631738, guid: 9967396f6f8ffef4a93595add324305b, type: 3}
+      propertyPath: startDelay.scalar
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
