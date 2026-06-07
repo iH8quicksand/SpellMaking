@@ -28,7 +28,7 @@
     "projectile": {
       "trajectory": "homing",
       "speed": "10",
-      "sprite": 0
+      "sprite": 1
     }
   },
   "arcane_blast": {
@@ -46,13 +46,13 @@
     "projectile": {
       "trajectory": "straight",
       "speed": "12",
-      "sprite": 0
+      "sprite": 2
     },
     "secondary_projectile": {
       "trajectory": "straight",
       "speed": "20",
       "lifetime": "0.1",
-      "sprite": 0
+      "sprite": 2
     }
   },
   "arcane_spray": {
@@ -70,7 +70,7 @@
     "projectile": {
       "trajectory": "straight",
       "speed": "8",
-      "sprite": 0,
+      "sprite": 3,
       "lifetime": "0.1 power 100 / +"
     }
   },

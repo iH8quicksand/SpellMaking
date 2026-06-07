@@ -25,7 +25,7 @@ public class Spell
     private string baseCooldown = "0.75f";
     private string baseSpeed = "15f";
     private Projectile.TrajectoryMod trajectory = Projectile.TrajectoryMod.STRAIGHT;
-    private int projectileSprite = 0;
+    private int projectileSprite;
     private string lifetime = "0";
 
     // Create the lists to hold the modifiers; each base spell holds a list of all the modifiers applied to it.
