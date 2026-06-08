@@ -19,6 +19,7 @@ public class Spell
     private string name = "Bolt";
     private string description = "Placeholder description";
     private int icon = 0;
+    private string sound = "arcane_bolt";
     private Damage.Type damageType = Damage.Type.ARCANE;
     private string baseMana = "10f";
     private string baseDamage = "100f";
@@ -76,6 +77,7 @@ public class Spell
         if (attributes["name"] != null) name = attributes["name"].ToString();
         if (attributes["description"] != null) description = attributes["description"].ToString();
         if (attributes["icon"] != null) icon = (int)attributes["icon"];
+        if (attributes["sound"] != null) sound = attributes["sound"].ToString();
         if (attributes.SelectToken("damage.type") != null)
         {
             switch(attributes.SelectToken("damage.type").ToString())
@@ -163,6 +165,10 @@ public class Spell
     {
         return icon;
     }
+    public virtual string GetSound()
+    {
+        return sound;
+    }
     public virtual Damage.Type GetDamageType()
     {
         return damageType;
@@ -190,6 +196,19 @@ public class Spell
 
     public virtual IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team)
     {
+        
+        AudioClip clip = Resources.Load<AudioClip>("Audio/" + GetSound());
+
+        if (clip != null)
+        {
+            
+            AudioSource.PlayClipAtPoint(clip, where);
+        }
+        else
+        {
+            Debug.LogWarning("Could not load sound: " + GetSound());
+        }
+
         EventBus.Instance.Broadcast_OnCastSpell();
         last_cast = Time.time;
         this.team = team;

@@ -3,6 +3,7 @@
     "name": "Arcane Bolt",
     "description": "A straight-flying bolt.",
     "icon": 0,
+    "sound": "arcane_bolt",
     "damage": {
       "amount": "25 power 5 / +",
       "type": "arcane"
@@ -19,6 +20,7 @@
     "name": "Magic Missile",
     "description": "A homing bolt.",
     "icon": 2,
+    "sound": "magic_missile",
     "damage": {
       "amount": "10 power 3 / +",
       "type": "arcane"
@@ -35,6 +37,7 @@
     "name": "Arcane Blast",
     "description": "A bolt that explodes into smaller bolts on impact.",
     "icon": 2,
+    "sound": "arcane_blast",
     "N": "8 power 5 / +",
     "damage": {
       "amount": "20 power 3 / +",
@@ -59,6 +62,7 @@
     "name": "Arcane Spray",
     "description": "A large number of short-range bolts in a cone.",
     "icon": 1,
+    "sound": "arcane_spray",
     "N": "7 power 25 / +",
     "spray": "0.3",
     "damage": {
