@@ -63,6 +63,11 @@ public class SpellCaster
             Vector3 targetDirection = playerTransform.Find("Main Camera").rotation * Vector3.forward;
             yield return spells[equippedSpellIndex].Cast(playerTransform.position, playerTransform.position + targetDirection, team);
         }
+        else
+        {
+            AudioClip clip = Resources.Load<AudioClip>("Audio/LowMana");
+            AudioSource.PlayClipAtPoint(clip,GameManager.Instance.player.transform.position);
+        }
         yield break;
     }
 
