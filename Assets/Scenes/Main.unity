@@ -13505,8 +13505,8 @@ Canvas:
   m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -13596,6 +13596,7 @@ MonoBehaviour:
   cam: {fileID: 519420028}
   sensitivity: 0.2
   SetSpell: {fileID: -5820382145234027407, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  pauseMenu: {fileID: 1717721838}
 --- !u!4 &1718273953
 Transform:
   m_ObjectHideFlags: 0
@@ -14102,6 +14103,7 @@ MonoBehaviour:
   - {fileID: 5974830082219523945, guid: e9cda1bc8b97a07448e5df63212a6180, type: 3}
   - {fileID: 5974830082219523945, guid: 9a98940a90f3b9e4695a267252ef3715, type: 3}
   - {fileID: 5974830082219523945, guid: 24fd68d917ba64d499aad9da4d383a61, type: 3}
+  audioMixer: {fileID: 24100000, guid: 4008cd46168afea40995e35f1417511a, type: 2}
 --- !u!1 &1807847392
 GameObject:
   m_ObjectHideFlags: 0

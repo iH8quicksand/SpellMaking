@@ -67,7 +67,7 @@ public class SpellCaster
         else
         {
             AudioClip clip = Resources.Load<AudioClip>("Audio/LowMana");
-            AudioSource.PlayClipAtPoint(clip,GameManager.Instance.player.transform.position);
+            AudioSource.PlayClipAtPoint(clip,GameManager.Instance.player.transform.position, VolumeManager.Instance.MasterVolume);
         }
         yield break;
     }

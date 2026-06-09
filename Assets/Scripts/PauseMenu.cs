@@ -7,21 +7,17 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
 
-    void Update()
+    public void TogglePaused()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            if (GameIsPaused)
-                Resume();
-            else
-                Pause();
-        }
+        if (GameIsPaused) Resume();
+        else Pause();
     }
 
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        GameManager.Instance.state = GameManager.GameState.INWAVE;
         GameIsPaused = false;
     }
 
@@ -29,6 +25,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+        GameManager.Instance.state = GameManager.GameState.PAUSED;
         GameIsPaused = true;
     }
 

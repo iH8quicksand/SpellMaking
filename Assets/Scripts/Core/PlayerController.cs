@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public GameObject cam;
     public float sensitivity = 0.1f;
     public InputActionReference SetSpell;
+    public PauseMenu pauseMenu;
 
 
     private PlayerClass playerClass;
@@ -118,6 +119,11 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
         unit.Jump();
+    }
+
+    void OnPause(InputValue value)
+    {
+        if (GameManager.Instance.state == GameManager.GameState.INWAVE) pauseMenu.TogglePaused();
     }
 
     void TrySetSpell(InputAction.CallbackContext context)

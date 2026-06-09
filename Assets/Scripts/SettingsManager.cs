@@ -3,12 +3,11 @@ using UnityEngine.Audio;
 
 public class SettingsMenu : MonoBehaviour
 {
-    public AudioMixer audioMixer;
 
     // VolumeSlider calls this function to set the volume
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("MasterVolume", volume);
+        VolumeManager.Instance.MasterVolume = (80f+volume)/80f;
     }
 
     // Togglable FullScreen Setting

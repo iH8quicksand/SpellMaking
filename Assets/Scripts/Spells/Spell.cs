@@ -201,8 +201,7 @@ public class Spell
 
         if (clip != null)
         {
-            
-            AudioSource.PlayClipAtPoint(clip, where);
+            AudioSource.PlayClipAtPoint(clip, where, VolumeManager.Instance.MasterVolume); 
         }
         else
         {
