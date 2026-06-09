@@ -24,7 +24,7 @@ public class ProjectileController : MonoBehaviour
     void Update()
     {
         movement.Movement(transform);
-        LookAtPlayer();
+        //LookAtPlayer(); //<-- For 2d spell sprites
     }
 
     public void LookAtPlayer()
