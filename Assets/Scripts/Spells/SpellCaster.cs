@@ -55,13 +55,19 @@ public class SpellCaster
         if (equippedSpellIndex >= index) equippedSpellIndex--;
     }
 
-    public IEnumerator Cast(Transform playerTransform)
+    public IEnumerator Cast(Transform cameraTransform)
     {
         if (mana >= spells[equippedSpellIndex].GetManaCost() && spells[equippedSpellIndex].IsReady())
         {
             mana -= spells[equippedSpellIndex].GetManaCost();
-            Vector3 targetDirection = playerTransform.Find("Main Camera").rotation * Vector3.forward;
-            yield return spells[equippedSpellIndex].Cast(playerTransform.position, playerTransform.position + targetDirection, team);
+            Vector3 targetOffset = cameraTransform.rotation * Vector3.forward;
+            Vector3 cameraPosition = cameraTransform.position;
+            yield return spells[equippedSpellIndex].Cast(cameraPosition + new Vector3(0f, -1f, 0f), cameraPosition + targetOffset * 2f + new Vector3(0f,-1f,0f), team);
+        }
+        else
+        {
+            AudioClip clip = Resources.Load<AudioClip>("Audio/LowMana");
+            AudioSource.PlayClipAtPoint(clip,GameManager.Instance.player.transform.position);
         }
         else
         {

@@ -22,6 +22,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemy;
     public SpawnPoint[] SpawnPoints;
     private readonly Dictionary<string, Enemy> enemy_types = new(); 
+    private  Dictionary<string, GameObject> enemy_prefabs = new();
     private readonly Dictionary<string, Level> level_types = new(); 
     private Dictionary<string, PlayerClass> class_types = new(); 
     public string currentLevelname;
@@ -32,6 +33,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         LoadEnemyType();
+        LoadPrefabLookup();
         LoadLevelType();
         level_selector.gameObject.SetActive(true);
         // loop through levels and add a button for each difficulty
@@ -110,6 +112,7 @@ public class EnemySpawner : MonoBehaviour
         {
             
             Spawn spawn = currentLevel.spawns[i];
+            Debug.Log($"Spawn request: {spawn.enemy}");
             Enemy enemy_data = enemy_types[spawn.enemy];
             
             SetPerameters parameters =  new()
@@ -190,11 +193,17 @@ public class EnemySpawner : MonoBehaviour
         Vector3 initial_position = spawn_point.GetRandomPosition();
         initial_position = new(initial_position.x, 0f, initial_position.z);
 
-        GameObject new_enemy = Instantiate(enemy, initial_position, Quaternion.identity);
-        
-        Enemy data = enemy_types[parameters.type];                                   // get the name of the enemy to are makeing
-        new_enemy.GetComponent<SpriteRenderer>().sprite = GameManager.Instance
-                                     .enemySpriteManager.Get(data.sprite);           // assign the sprite of the name
+        Enemy data = enemy_types[parameters.type];
+        string key = data.prefabKey.Trim().ToLower();
+
+        if (!enemy_prefabs.TryGetValue(key, out GameObject enemy_prefab))
+        {
+            Debug.LogError($"Missing prefab mapping for: {key}");
+            return;
+        }
+
+        GameObject new_enemy = Instantiate(enemy_prefab, initial_position, Quaternion.identity); // create the enemy in the game
+
         new_enemy.GetComponent<EnemyController>().SetParameters(parameters);         // assign the contoller to the name and parameters
                                                         // function in enemycontroller
         GameManager.Instance.AddEnemy(new_enemy);                                    // creat the enemy in the game
@@ -210,6 +219,17 @@ public class EnemySpawner : MonoBehaviour
             Enemy en = enemy.ToObject<Enemy>();
             enemy_types[en.name] = en;
         }
+    }
+
+    public void LoadPrefabLookup()
+    {
+        enemy_prefabs = new Dictionary<string, GameObject>();
+
+        enemy_prefabs["ant"] = Resources.Load<GameObject>("Ant");
+        enemy_prefabs["rat"] = Resources.Load<GameObject>("Rat");
+        enemy_prefabs["snake"] = Resources.Load<GameObject>("Snake");
+        enemy_prefabs["toad"] = Resources.Load<GameObject>("Toad");
+        enemy_prefabs["spider"] = Resources.Load<GameObject>("Spider");
     }
 
     public void LoadLevelType()
