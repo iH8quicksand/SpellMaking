@@ -27,6 +27,7 @@ public class EventBus
     public event Action OnKill;
     public event Action OnMove;
     public event Action OnCastSpell;
+    //public event Action OnPauseToggled;
     public event Action<string> GainHealth;
     public event Action<string> MaxHealthIncrease;
     
@@ -78,6 +79,10 @@ public class EventBus
     {
         OnCastSpell?.Invoke();
     }
+    //public void Broadcast_OnPauseToggled()//trigger to send
+    //{
+    //    OnPauseToggled?.Invoke();
+    //}
     public void Broadcast_GainHealth(string rpn_healthGained)//effect to receive
     {
         GainHealth?.Invoke(rpn_healthGained);

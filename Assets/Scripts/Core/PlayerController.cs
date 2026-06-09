@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     public GameObject cam;
     public float sensitivity = 0.1f;
     public InputActionReference SetSpell;
+    //public InputActionReference PauseAction;
+    //private bool initialized;
 
 
     private PlayerClass playerClass;
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //initialized = true;
         unit = GetComponent<Unit>();
         GameManager.Instance.player = gameObject;
 
@@ -60,6 +63,7 @@ public class PlayerController : MonoBehaviour
         spellui.SetSpell(spellcaster.spells[0]);
 
         SetSpell.action.started += TrySetSpell;
+        PauseAction.action.started += OnPause;
     }
 
     public void StartLevel()
@@ -124,6 +128,11 @@ public class PlayerController : MonoBehaviour
     {
         int index = int.Parse(context.control.name) - 1;
         if (index < spellcaster.spells.Count) EventBus.Instance.Broadcast_SetSpell(index);
+    }
+
+    void OnPause(InputAction.CallbackContext context)
+    {
+        EventBus.Instance.Broadcast_OnPauseToggled();
     }
 
     void Die()
