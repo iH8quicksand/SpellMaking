@@ -1,16 +1,19 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
-public class SettingsManager : MonoBehaviour
+public class SettingsMenu : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public AudioMixer audioMixer;
+
+    // VolumeSlider calls this function to set the volume
+    public void SetVolume(float volume)
     {
-        
+        audioMixer.SetFloat("MasterVolume", volume);
     }
 
-    // Update is called once per frame
-    void Update()
+    // Togglable FullScreen Setting
+    public void SetFullScreen(bool isFullScreen)
     {
-        
+        Screen.fullScreen = isFullScreen;
     }
 }
