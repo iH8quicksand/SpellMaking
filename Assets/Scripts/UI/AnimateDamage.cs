@@ -43,5 +43,8 @@ public class AnimateDamage : MonoBehaviour
             GetComponent<TMP_Text>().fontMaterial.color = Color.Lerp(color_i, color_f, progress);
         }
         else Destroy(gameObject);
+
+        gameObject.transform.LookAt(GameManager.Instance.player.transform);
+        gameObject.transform.forward *= -1;
     }
 }
