@@ -23,7 +23,7 @@
     {
         "name": "knight",
         "sprite": 17,
-        "hp": 100,
+        "hp": 70,
         "speed": 5,
         "damage": 30
     },

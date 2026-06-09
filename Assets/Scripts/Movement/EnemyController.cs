@@ -22,20 +22,26 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target == null) return;
+
         Vector3 direction = target.position - transform.position;
-        Vector2 direction2 = new(direction.x, direction.z);
-        if (direction2.magnitude < 2f)
+        float distance = new Vector2(direction.x, direction.z).magnitude;
+
+        if (distance < 2f)
         {
+            GetComponent<UnityEngine.AI.NavMeshAgent>().isStopped = true;
             DoAttack();
         }
         else
         {
-            GetComponent<Unit>().movement = direction2.normalized * speed;
+            GetComponent<UnityEngine.AI.NavMeshAgent>().isStopped = false;
+            GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(target.position);
         }
+
         transform.LookAt(target);
         transform.eulerAngles = new Vector3(0f, transform.eulerAngles.y, 0f);
     }
-    
+
     void DoAttack()
     {
         if (last_attack + 2 < Time.time)
@@ -59,10 +65,10 @@ public class EnemyController : MonoBehaviour
 
     public void SetParameters(SetPerameters parameters)
     {
-        
-        hp     = new Hittable(parameters.hp, Hittable.Team.MONSTERS, gameObject);
+
+        hp = new Hittable(parameters.hp, Hittable.Team.MONSTERS, gameObject);
         damage = parameters.damage;
-        speed  = parameters.speed;
+        speed = parameters.speed;
 
     }
 }
