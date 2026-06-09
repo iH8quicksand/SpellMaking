@@ -64,6 +64,11 @@ public class SpellCaster
             Vector3 cameraPosition = cameraTransform.position;
             yield return spells[equippedSpellIndex].Cast(cameraPosition + new Vector3(0f, -1f, 0f), cameraPosition + targetOffset * 2f + new Vector3(0f,-1f,0f), team);
         }
+        else
+        {
+            AudioClip clip = Resources.Load<AudioClip>("Audio/LowMana");
+            AudioSource.PlayClipAtPoint(clip,GameManager.Instance.player.transform.position);
+        }
         yield break;
     }
 
