@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
         //if (EventSystem.current.IsPointerOverGameObject()) return; //<-- Doesn't matter in 3D since cursor is always centered
-        StartCoroutine(spellcaster.Cast(transform));
+        StartCoroutine(spellcaster.Cast(cam.transform));
     }
 
     void OnMove(InputValue value)
