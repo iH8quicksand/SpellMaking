@@ -1,8 +1,10 @@
 using UnityEngine;
+using System;
 
 public class VolumeManager : MonoBehaviour
 {
     public float MasterVolume = 1.0f;
+    public event Action OnVolumeChanged;
 
     public static VolumeManager Instance { get; private set; }
 
@@ -16,5 +18,11 @@ public class VolumeManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void SetVolume(float volume)
+    {
+        MasterVolume = volume;
+        OnVolumeChanged?.Invoke();
     }
 }
