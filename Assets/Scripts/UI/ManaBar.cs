@@ -14,7 +14,7 @@ public class ManaBar : MonoBehaviour
     {
         if (sc == null) return;
         float perc = sc.mana * 1.0f / sc.max_mana;
-        if (Mathf.Abs(perc - old_perc) > 0.1f)
+        if (Mathf.Abs(perc - old_perc) > 0.001f)
         {
             slider.GetComponent<RectTransform>().offsetMax = new Vector2(-Mathf.Lerp(450f, 150f, perc), 25f);
             label.text = "Mana: " + sc.mana + "/" + sc.max_mana;
