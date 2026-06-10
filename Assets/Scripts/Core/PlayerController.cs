@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
         float rotationX = rotation.x - lookVector.y * sensitivity;
         if (rotationX > 90f && rotationX <= 270f) rotationX = (180f - rotationX >= 0) ? 90f : 270f;
         cam.transform.rotation = Quaternion.Euler(rotationX, rotation.y, rotation.z);
-        transform.Rotate(Vector3.up * lookVector.x * sensitivity);
+        transform.Rotate(lookVector.x * sensitivity * Vector3.up);
     }
 
     void OnJump(InputValue value)

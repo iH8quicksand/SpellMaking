@@ -10,8 +10,8 @@ public class Unit : MonoBehaviour
     private float lastMoved;
     private bool isMoving;
     private float velocityY = 0f;
-    private float nextFootstepTime;
-    public float footstepInterval = 0.35f;
+    private float lastFootstepTime = 0f;
+    public float footstepInterval = 0.4f;
     private AudioClip footstepClip;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,11 +48,10 @@ public class Unit : MonoBehaviour
                 //Debug.Log("hasn't been moving for 3 seconds");
             }
 
-            if (isPlayer && movingThisFrame && Time.time >= nextFootstepTime && velocityY == 0)
+            if (movingThisFrame && Time.time - lastFootstepTime > footstepInterval && velocityY == 0)
             {
-                AudioSource.PlayClipAtPoint(footstepClip,transform.position);
-
-                nextFootstepTime = Time.time + footstepInterval;
+                AudioSource.PlayClipAtPoint(footstepClip, transform.position, VolumeManager.Instance.MasterVolume * 0.3f);
+                lastFootstepTime = Time.time;
             }
         }
         if (velocityY > 0f)

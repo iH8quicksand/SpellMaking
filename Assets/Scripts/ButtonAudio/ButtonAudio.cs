@@ -7,6 +7,6 @@ public class UISounds : MonoBehaviour
 
     public void PlayClick()
     {
-        audioSource.PlayOneShot(clickSound);
+        audioSource.PlayOneShot(clickSound, VolumeManager.Instance.MasterVolume);
     }
 }
