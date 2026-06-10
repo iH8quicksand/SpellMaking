@@ -1,10 +1,12 @@
+using TMPro;
 using UnityEngine;
 
 public class ManaBar : MonoBehaviour
 {
     public GameObject slider;
+    public TextMeshProUGUI label;
 
-    public SpellCaster sc;
+    private SpellCaster sc;
     float old_perc;
 
     // Update is called once per frame
@@ -12,10 +14,10 @@ public class ManaBar : MonoBehaviour
     {
         if (sc == null) return;
         float perc = sc.mana * 1.0f / sc.max_mana;
-        if (Mathf.Abs(old_perc - perc) > 0.01f)
+        if (Mathf.Abs(perc - old_perc) > 0.1f)
         {
-            slider.transform.localScale = new Vector3(perc, 1, 1);
-            slider.transform.localPosition = new Vector3(-(1 - perc) / 2, 0, 0);
+            slider.GetComponent<RectTransform>().offsetMax = new Vector2(-Mathf.Lerp(450f, 150f, perc), 25f);
+            label.text = "Mana: " + sc.mana + "/" + sc.max_mana;
             old_perc = perc;
         }
     }
@@ -23,6 +25,7 @@ public class ManaBar : MonoBehaviour
     public void SetSpellCaster(SpellCaster sc)
     {
         this.sc = sc;
-        old_perc = 0;
+        old_perc = sc.mana * 1.0f / sc.max_mana;
+        label.text = "Mana: " + sc.mana + "/" + sc.max_mana;
     }
 }

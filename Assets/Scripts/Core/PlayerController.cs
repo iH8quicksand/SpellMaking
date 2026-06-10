@@ -15,9 +15,9 @@ using static RPNEvaluator.RPNEvaluator;
 public class PlayerController : MonoBehaviour
 {
     public Hittable hp;
-    public HealthBar healthui;
+    public PlayerHealthBar healthui;
     public ManaBar manaui;
-    public SpriteRenderer spriteRenderer;
+    //public SpriteRenderer spriteRenderer;
 
     public SpellCaster spellcaster;
     public SpellUI spellui;
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public GameObject cam;
     public float sensitivity = 0.1f;
     public InputActionReference SetSpell;
+    public PauseMenu pauseMenu;
 
 
     private PlayerClass playerClass;
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
     public void UpdatePlayerClass(PlayerClass pc)
     {
         playerClass = pc;
-        GameManager.Instance.playerSpriteManager.PlaceSprite(pc.Sprite, spriteRenderer);
+        //GameManager.Instance.playerSpriteManager.PlaceSprite(pc.Sprite, spriteRenderer);
     }
 
     public void UpdatePlayerStats(int wave)
@@ -87,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
         //if (EventSystem.current.IsPointerOverGameObject()) return; //<-- Doesn't matter in 3D since cursor is always centered
-        StartCoroutine(spellcaster.Cast(transform));
+        StartCoroutine(spellcaster.Cast(cam.transform));
     }
 
     void OnMove(InputValue value)
@@ -120,6 +121,11 @@ public class PlayerController : MonoBehaviour
         unit.Jump();
     }
 
+    void OnPause(InputValue value)
+    {
+        if (GameManager.Instance.state == GameManager.GameState.INWAVE) pauseMenu.TogglePaused();
+    }
+
     void TrySetSpell(InputAction.CallbackContext context)
     {
         int index = int.Parse(context.control.name) - 1;
@@ -128,7 +134,7 @@ public class PlayerController : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("You Lost");
+        //Debug.Log("You Lost");
         GameManager.Instance.state = GameManager.GameState.GAMEOVER;
     }
 

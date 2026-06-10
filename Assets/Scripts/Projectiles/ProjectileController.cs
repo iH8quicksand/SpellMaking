@@ -24,7 +24,7 @@ public class ProjectileController : MonoBehaviour
     void Update()
     {
         movement.Movement(transform);
-        LookAtPlayer();
+        //LookAtPlayer(); //<-- For 2d spell sprites
     }
 
     public void LookAtPlayer()
@@ -46,8 +46,10 @@ public class ProjectileController : MonoBehaviour
             else if (collision.gameObject.TryGetComponent<PlayerController>(out var pc))
             {
                 OnHit(pc.hp, transform.position);
+                return; //since we're not doing multiplayer, we just need to projectile to keep going if you're shooting it straight down and it collides with yourself.
             }
         }
+        //Debug.Log(collision.gameObject.name);
         OnProjectileCollision(this);
     }
 

@@ -2,10 +2,12 @@ using UnityEngine;
 using System;
 using NUnit.Framework;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class ProjectileManager : MonoBehaviour
 {
     public GameObject[] projectiles;//see data in Unity inspector
+    public AudioMixer audioMixer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
