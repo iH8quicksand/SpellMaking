@@ -1,9 +1,16 @@
 using UnityEngine;
 
-public class UISounds : MonoBehaviour
+public class ButtonAudio : MonoBehaviour
 {
+    public static ButtonAudio Instance;
+
     public AudioSource audioSource;
     public AudioClip clickSound;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     public void PlayClick()
     {
