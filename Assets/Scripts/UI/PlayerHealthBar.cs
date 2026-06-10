@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -5,17 +6,19 @@ using UnityEngine.UIElements;
 public class PlayerHealthBar : MonoBehaviour
 {
     public GameObject slider;
+    public TextMeshProUGUI label;
     
-    public Hittable hp;
-    float old_perc;
+    private Hittable hp;
+    private float old_perc;
 
     void Update()
     {
         if (hp == null) return;
         float perc = hp.hp * 1.0f / hp.max_hp;
-        if (Mathf.Abs(old_perc - perc) > 0.01f)
+        if (Mathf.Abs(perc - old_perc) > 0.1f)
         {
-            slider.GetComponent<RectTransform>().offsetMax = new Vector2(-Mathf.Lerp(450f, 150f, perc), 25f);
+            slider.GetComponent<RectTransform>().offsetMax = new Vector2(-Mathf.Lerp(550f, 150f, perc), 25f);
+            label.text = "HP: " + hp.hp + "/" + hp.max_hp;
             old_perc = perc;
         }
     }
@@ -23,12 +26,7 @@ public class PlayerHealthBar : MonoBehaviour
     public void SetHealth(Hittable hp)
     {
         this.hp = hp;
-        float perc = hp.hp * 1.0f / hp.max_hp;
-        
-        slider.transform.localScale = new Vector3(perc, 1, 1);
-        slider.transform.localPosition = new Vector3(-(1-perc)/2, 0, 0);
-        old_perc = perc;
+        old_perc = hp.hp * 1.0f / hp.max_hp;
+        label.text = "HP: " + hp.hp + "/" + hp.max_hp;
     }
-
-    
 }

@@ -28,6 +28,7 @@ public class EnemySpawner : MonoBehaviour
     public string currentLevelname;
     public int wave_count;
     public int delay = 2;
+    public PauseMenu pauseMenu;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -90,6 +91,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void NextWave() // Executed when Next Wave button pressed
     {
+        if (GameManager.Instance.state == GameManager.GameState.PAUSED) pauseMenu.Resume();
         wave_count++;
         GameManager.Instance.player.GetComponent<PlayerController>().UpdatePlayerStats(wave_count);
         EventBus.Instance.Broadcast_WaveStart(); //Currently used just to close reward screen, but should be used more!
@@ -112,7 +114,7 @@ public class EnemySpawner : MonoBehaviour
         {
             
             Spawn spawn = currentLevel.spawns[i];
-            Debug.Log($"Spawn request: {spawn.enemy}");
+            //Debug.Log($"Spawn request: {spawn.enemy}");
             Enemy enemy_data = enemy_types[spawn.enemy];
             
             SetPerameters parameters =  new()

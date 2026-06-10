@@ -62,7 +62,7 @@ public class SpellCaster
             mana -= spells[equippedSpellIndex].GetManaCost();
             Vector3 targetOffset = cameraTransform.rotation * Vector3.forward;
             Vector3 cameraPosition = cameraTransform.position;
-            yield return spells[equippedSpellIndex].Cast(cameraPosition + new Vector3(0f, -1f, 0f), cameraPosition + targetOffset * 2f + new Vector3(0f,-1f,0f), team);
+            yield return spells[equippedSpellIndex].Cast(cameraPosition + new Vector3(0f, -0.5f, 0f), cameraPosition + targetOffset * 2f + new Vector3(0f,-0.5f,0f), team);
         }
         else
         {

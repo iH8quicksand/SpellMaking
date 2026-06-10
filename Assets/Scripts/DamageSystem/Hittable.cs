@@ -15,14 +15,14 @@ public class Hittable
 
     public void Damage(Damage damage)
     {
-        EventBus.Instance.DoDamage(owner.transform.position, damage, this);
-        hp -= damage.amount;
-        GameManager.Instance.RegisterDamage(damage.amount);
+        hp -= damage.amount; GameManager.Instance.RegisterDamage(damage.amount);
         if (hp <= 0)
         {
             hp = 0;
             OnDeath();
         }
+        EventBus.Instance.DoDamage(owner.transform.position, damage, this);
+        
     }
 
     public event Action OnDeath;
