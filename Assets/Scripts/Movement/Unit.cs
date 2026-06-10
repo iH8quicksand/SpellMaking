@@ -65,11 +65,14 @@ public class Unit : MonoBehaviour
 
     public void Move(Vector3 movementVector)
     {
-        //bool isHit = GetComponent<Rigidbody>().SweepTest(movementVector, out RaycastHit hit, movementVector.magnitude * 2);
-        //if (!isHit)
-        //{
-            transform.Translate(movementVector);
-        //}
+        if (isPlayer)
+        {
+            transform.Translate(movementVector, Space.Self);
+        }
+        else
+        {
+            transform.Translate(movementVector, Space.World);
+        }
     }
 
     public void Jump()

@@ -1725,6 +1725,7 @@ MonoBehaviour:
   isPlayer: 0
   movement: {x: 0, y: 0}
   distance: 0
+  footstepInterval: 0.35
 --- !u!135 &1850998323341653058
 SphereCollider:
   m_ObjectHideFlags: 0
