@@ -11,6 +11,8 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.LookAt(GameManager.Instance.player.transform);
+        transform.forward = - transform.forward;
         if (hp == null) return;
         float perc = hp.hp * 1.0f / hp.max_hp;
         if (Mathf.Abs(old_perc - perc) > 0.01f)

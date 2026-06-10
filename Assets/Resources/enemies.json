@@ -23,7 +23,7 @@
    {
        "name": "toad",
        "prefabKey": "Toad",
-       "hp": 200,
+       "hp": 100,
        "speed": 4,
        "damage": 30
    },

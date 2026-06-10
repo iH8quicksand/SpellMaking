@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        LoadEnemyType();
+        LoadEnemyTypes();
         LoadPrefabLookup();
         LoadLevelType();
         level_selector.gameObject.SetActive(true);
@@ -212,7 +212,7 @@ public class EnemySpawner : MonoBehaviour
     }
     
     
-    public void LoadEnemyType()
+    public void LoadEnemyTypes()
     {
         var enemytext = Resources.Load<TextAsset>("enemies");   // this loads the enemies files
         JToken jo = JToken.Parse(enemytext.text);

@@ -4698,7 +4698,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0.013}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14453,7 +14453,7 @@ MonoBehaviour:
   isPlayer: 1
   movement: {x: 0, y: 0}
   distance: 0
-  footstepInterval: 0.2
+  footstepInterval: 0.4
 --- !u!54 &1718273958
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -67550,3 +67550,4 @@ SceneRoots:
   - {fileID: 856041117}
   - {fileID: 1836182973}
   - {fileID: 891454187}
+  - {fileID: 2060704671}
