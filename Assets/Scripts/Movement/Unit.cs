@@ -20,10 +20,7 @@ public class Unit : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (isPlayer)
-        {
-            Move(new Vector3(movement.x, 0, movement.y) * Time.fixedDeltaTime);
-        }
+        Move(new Vector3(movement.x, 0, movement.y) * Time.fixedDeltaTime);
         //Move(new Vector3(0, 0, movement.y) * Time.fixedDeltaTime);
         distance += movement.magnitude * Time.fixedDeltaTime;
         if (isPlayer)
