@@ -10,11 +10,15 @@ public class Unit : MonoBehaviour
     private float lastMoved;
     private bool isMoving;
     private float velocityY = 0f;
+    private float nextFootstepTime;
+    public float footstepInterval = 0.35f;
+    private AudioClip footstepClip;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         isMoving = false;
+        footstepClip = Resources.Load<AudioClip>("Audio/footstep");
     }
 
     // Update is called once per frame
@@ -42,6 +46,13 @@ public class Unit : MonoBehaviour
             {
                 EventBus.Instance.Broadcast_StandingStill();
                 //Debug.Log("hasn't been moving for 3 seconds");
+            }
+
+            if (isPlayer && movingThisFrame && Time.time >= nextFootstepTime && velocityY == 0)
+            {
+                AudioSource.PlayClipAtPoint(footstepClip,transform.position);
+
+                nextFootstepTime = Time.time + footstepInterval;
             }
         }
         if (velocityY > 0f)
