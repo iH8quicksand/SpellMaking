@@ -80,7 +80,7 @@ public class Spell
         if (attributes["sound"] != null) sound = attributes["sound"].ToString();
         if (attributes.SelectToken("damage.type") != null)
         {
-            switch(attributes.SelectToken("damage.type").ToString())
+            switch (attributes.SelectToken("damage.type").ToString())
             {//PHYSICAL, ARCANE, NATURE, FIRE, ICE, DARK, LIGHT, EMOTIONAL
                 case "physical":
                     damageType = Damage.Type.PHYSICAL; break;
@@ -119,9 +119,9 @@ public class Spell
     {
         return name;
     }
-    public Dictionary<string,int> GetRPNDict()
+    public Dictionary<string, int> GetRPNDict()
     {
-        return new Dictionary<string, int> { { "wave", GameManager.Instance.GetWave() }, { "power", owner.spell_power} };
+        return new Dictionary<string, int> { { "wave", GameManager.Instance.GetWave() }, { "power", owner.spell_power } };
     }
 
     // STATS THAT GET CHANGED BY MODIFIERS ---------------------------------------
@@ -141,7 +141,7 @@ public class Spell
     public virtual float GetCooldown()
     {
         float modifiedCoolDown = ValueModifier.Apply(baseCooldown, cooldownModifiers, GetRPNDict());
-        return Mathf.RoundToInt(modifiedCoolDown);
+        return modifiedCoolDown;
     }
 
     public virtual float GetSpeed()
@@ -188,7 +188,7 @@ public class Spell
     {
         return (last_cast + GetCooldown() < Time.time);
     }
-    
+
     public virtual float GetLastCast()
     {
         return last_cast;
@@ -196,12 +196,12 @@ public class Spell
 
     public virtual IEnumerator Cast(Vector3 where, Vector3 target, Hittable.Team team)
     {
-        
+
         AudioClip clip = Resources.Load<AudioClip>("Audio/" + GetSound());
 
         if (clip != null)
         {
-            AudioSource.PlayClipAtPoint(clip, where, VolumeManager.Instance.MasterVolume); 
+            AudioSource.PlayClipAtPoint(clip, where, VolumeManager.Instance.MasterVolume);
         }
         else
         {
