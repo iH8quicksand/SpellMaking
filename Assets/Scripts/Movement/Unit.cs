@@ -58,7 +58,7 @@ public class Unit : MonoBehaviour
         //bool isHit = GetComponent<Rigidbody>().SweepTest(movementVector, out RaycastHit hit, movementVector.magnitude * 2);
         //if (!isHit)
         //{
-            transform.Translate(movementVector);
+        transform.Translate(movementVector);
         //}
     }
 
