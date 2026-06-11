@@ -12,7 +12,7 @@ public class SpellUIContainer : MonoBehaviour
     {
         // we only have one spell (right now)
         spellUIs[0].SetActive(true);
-        for(int i = 1; i< spellUIs.Length; ++i)
+        for (int i = 1; i < spellUIs.Length; ++i)
         {
             spellUIs[i].SetActive(false);
         }
@@ -21,6 +21,14 @@ public class SpellUIContainer : MonoBehaviour
         EventBus.Instance.WaveStart += HideDropButtons;
         EventBus.Instance.SetSpell += SetSpellTooltip;
         spellTooltip.text = "";
+    }
+
+    void OnDestroy()
+    {
+        EventBus.Instance.AddSpell -= AddSpell;
+        EventBus.Instance.RemoveSpell -= RemoveSpell;
+        EventBus.Instance.WaveStart -= HideDropButtons;
+        EventBus.Instance.SetSpell -= SetSpellTooltip;
     }
 
     public void ShowDropButtons()
@@ -41,7 +49,7 @@ public class SpellUIContainer : MonoBehaviour
     {
         // First, get the index of the next free spell UI
         int freeIndex = 0;
-        while (freeIndex < spellUIs.Length-1)
+        while (freeIndex < spellUIs.Length - 1)
         {
             if (spellUIs[freeIndex].activeSelf == false) break; //if the slot at freeIndex is inactive, break (freeIndex found)
             freeIndex++;
@@ -54,7 +62,7 @@ public class SpellUIContainer : MonoBehaviour
     public void RemoveSpell(int index)
     {
         spellUIs[3].SetActive(false);
-        for (int i=0; i<spellUIs.Length-1; i++)
+        for (int i = 0; i < spellUIs.Length - 1; i++)
         {
             spellUIs[i].GetComponent<SpellUI>().SetSpell(GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.spells[i]);
         }

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SpellCaster 
+public class SpellCaster
 {
     public Transform transform; // so doublerModifier can get players location
     public int mana;
@@ -40,6 +40,13 @@ public class SpellCaster
         EventBus.Instance.RemoveSpell += RemoveSpell;
     }
 
+    public void Dispose()
+    {
+        EventBus.Instance.AddSpell -= AddSpell;
+        EventBus.Instance.SetSpell -= SetSpell;
+        EventBus.Instance.RemoveSpell -= RemoveSpell;
+    }
+
     public Spell GenerateRandomSpell()
     {
         return SpellBuilder.Build(this);
@@ -62,12 +69,12 @@ public class SpellCaster
             mana -= spells[equippedSpellIndex].GetManaCost();
             Vector3 targetOffset = cameraTransform.rotation * Vector3.forward;
             Vector3 cameraPosition = cameraTransform.position;
-            yield return spells[equippedSpellIndex].Cast(cameraPosition + new Vector3(0f, -0.5f, 0f), cameraPosition + targetOffset * 2f + new Vector3(0f,-0.5f,0f), team);
+            yield return spells[equippedSpellIndex].Cast(cameraPosition + new Vector3(0f, -0.5f, 0f), cameraPosition + targetOffset * 2f + new Vector3(0f, -0.5f, 0f), team);
         }
         else
         {
             AudioClip clip = Resources.Load<AudioClip>("Audio/LowMana");
-            AudioSource.PlayClipAtPoint(clip,GameManager.Instance.player.transform.position, VolumeManager.Instance.MasterVolume);
+            AudioSource.PlayClipAtPoint(clip, GameManager.Instance.player.transform.position, VolumeManager.Instance.MasterVolume);
         }
         yield break;
     }

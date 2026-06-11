@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public int speed;
 
     public Unit unit;
-    
+
     public bool dead = false;
 
     public GameObject cam;
@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(spellcaster.ManaRegeneration());
         EventBus.Instance.GainMana += spellcaster.GainMana;
         EventBus.Instance.GainSpellPower += spellcaster.GainSpellPower;
-        
+
         hp = new Hittable(100, Hittable.Team.PLAYER, gameObject);
         hp.OnDeath += Die;
         hp.team = Hittable.Team.PLAYER;
@@ -61,6 +61,14 @@ public class PlayerController : MonoBehaviour
         spellui.SetSpell(spellcaster.spells[0]);
 
         SetSpell.action.started += TrySetSpell;
+    }
+
+    void OnDestroy()
+    {
+        EventBus.Instance.GainMana -= spellcaster.GainMana;
+        EventBus.Instance.GainSpellPower -= spellcaster.GainSpellPower;
+        EventBus.Instance.GainHealth -= hp.GainHP;
+        spellcaster?.Dispose();
     }
 
     public void StartLevel()
@@ -76,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
     public void UpdatePlayerStats(int wave)
     {
-        Dictionary<string,int> RPNDict = new() { { "wave", wave } };
+        Dictionary<string, int> RPNDict = new() { { "wave", wave } };
         hp.SetMaxHP(Evaluate(playerClass.Health, RPNDict));
         spellcaster.max_mana = Evaluate(playerClass.Mana, RPNDict);
         spellcaster.mana_reg = Evaluate(playerClass.Mana_Regeneration, RPNDict);
@@ -94,7 +102,7 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue value)
     {
         if (GameManager.Instance.state != GameManager.GameState.INWAVE) return;
-        unit.movement = value.Get<Vector2>()*speed;
+        unit.movement = value.Get<Vector2>() * speed;
     }
 
     void OnLook(InputValue value)

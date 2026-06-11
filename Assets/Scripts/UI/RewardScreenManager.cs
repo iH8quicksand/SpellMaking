@@ -39,6 +39,12 @@ public class RewardScreenManager : MonoBehaviour
         AcceptRelic += relicUI.GetComponent<RelicUIManager>().OnRelicPickup;
     }
 
+    void OnDestroy()
+    {
+        EventBus.Instance.WaveEnd -= Show;
+        EventBus.Instance.WaveStart -= Hide;
+    }
+
     public void Show()
     {
         offeredSpell = GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.GenerateRandomSpell();
@@ -90,7 +96,7 @@ public class RewardScreenManager : MonoBehaviour
     public void ClearRelics()
     {
         if (relicSelectors == null) return;
-        foreach (GameObject relicSelector in  relicSelectors)
+        foreach (GameObject relicSelector in relicSelectors)
         {
             Destroy(relicSelector);
         }
@@ -104,7 +110,7 @@ public class RewardScreenManager : MonoBehaviour
             EventBus.Instance.Broadcast_AddSpell(offeredSpell);
             spellPanel.GetComponent<Image>().color = new Color32(0x1A, 0xFF, 0x00, 0x76);
             getSpellButton.SetActive(false);
-            
+
         }
     }
     public Action<Relic> AcceptRelic;
