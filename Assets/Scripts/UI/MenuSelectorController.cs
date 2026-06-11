@@ -15,6 +15,7 @@ public class MenuSelectorController : MonoBehaviour
 
     public void StartLevel()
     {
+        ButtonAudioManager.Instance.PlayClick();
         spawner.SelectLevel(level);
     }
 }

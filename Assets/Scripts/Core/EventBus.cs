@@ -48,6 +48,7 @@ public class EventBus
     }
     public void Broadcast_SetSpell(int index)
     {
+        ButtonAudioManager.Instance.PlayClick();
         SetSpell?.Invoke(index);
     }
     public void Broadcast_RemoveSpell(int index)

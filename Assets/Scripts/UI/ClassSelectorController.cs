@@ -20,6 +20,7 @@ public class ClassSelectorController : MonoBehaviour
 
     public void StartLevel()
     {
+        ButtonAudioManager.Instance.PlayClick();
         spawner.StartLevel(playerClass);
     }
 }

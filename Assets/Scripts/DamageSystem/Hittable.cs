@@ -15,7 +15,22 @@ public class Hittable
 
     public void Damage(Damage damage)
     {
-        hp -= damage.amount; GameManager.Instance.RegisterDamage(damage.amount);
+        EventBus.Instance.DoDamage(owner.transform.position, damage, this);
+        hp -= damage.amount;
+        GameManager.Instance.RegisterDamage(damage.amount);
+        
+        //AudioClip clipPlayer = Resources.Load<AudioClip>("Audio/playerhit");
+
+        if (team == Team.MONSTERS)
+        {
+            AudioClip clipMonsterDamage = Resources.Load<AudioClip>("Audio/monsterhit");
+            AudioSource.PlayClipAtPoint(clipMonsterDamage, owner.transform.position, VolumeManager.Instance.MasterVolume);
+        }
+        if (team == Team.PLAYER)
+        {
+            AudioClip clipPlayerDamage = Resources.Load<AudioClip>("Audio/playerhit");
+            AudioSource.PlayClipAtPoint(clipPlayerDamage, owner.transform.position, VolumeManager.Instance.MasterVolume);
+        }
         if (hp <= 0)
         {
             hp = 0;

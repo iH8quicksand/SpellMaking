@@ -24,6 +24,7 @@ public class RelicSelectorUI : MonoBehaviour
     }
     public void Take()
     {
+        ButtonAudioManager.Instance.PlayClick();
         acceptRelic?.Invoke(relic);
         panel.GetComponent<Image>().color = new Color32(0x1A, 0xFF, 0x00, 0x76);//"#1AFF0076"
         button.SetActive(false);

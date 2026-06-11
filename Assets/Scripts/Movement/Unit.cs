@@ -10,11 +10,15 @@ public class Unit : MonoBehaviour
     private float lastMoved;
     private bool isMoving;
     private float velocityY = 0f;
+    private float lastFootstepTime = 0f;
+    public float footstepInterval = 0.4f;
+    private AudioClip footstepClip;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         isMoving = false;
+        footstepClip = Resources.Load<AudioClip>("Audio/footstep");
     }
 
     // Update is called once per frame
@@ -22,7 +26,7 @@ public class Unit : MonoBehaviour
     {
         Move(new Vector3(movement.x, 0, movement.y) * Time.fixedDeltaTime);
         //Move(new Vector3(0, 0, movement.y) * Time.fixedDeltaTime);
-        distance += movement.magnitude * Time.fixedDeltaTime;
+        distance += movement.magnitude*Time.fixedDeltaTime;
         if (isPlayer)
         {
             bool movingThisFrame = movement.magnitude > 0.1f;
@@ -43,6 +47,12 @@ public class Unit : MonoBehaviour
                 EventBus.Instance.Broadcast_StandingStill();
                 //Debug.Log("hasn't been moving for 3 seconds");
             }
+
+            if (movingThisFrame && Time.time - lastFootstepTime > footstepInterval && velocityY == 0)
+            {
+                AudioSource.PlayClipAtPoint(footstepClip, transform.position, VolumeManager.Instance.MasterVolume * 0.3f);
+                lastFootstepTime = Time.time;
+            }
         }
         if (velocityY > 0f)
         {
@@ -55,11 +65,14 @@ public class Unit : MonoBehaviour
 
     public void Move(Vector3 movementVector)
     {
-        //bool isHit = GetComponent<Rigidbody>().SweepTest(movementVector, out RaycastHit hit, movementVector.magnitude * 2);
-        //if (!isHit)
-        //{
-        transform.Translate(movementVector);
-        //}
+        if (isPlayer)
+        {
+            transform.Translate(movementVector, Space.Self);
+        }
+        else
+        {
+            transform.Translate(movementVector, Space.World);
+        }
     }
 
     public void Jump()

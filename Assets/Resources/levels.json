@@ -14,20 +14,20 @@
             {
                 "enemy": "rat",
                 "count": "wave 3 /",
-                "hp": "200 wave *",
+                "hp": "base wave *",
                 "sequence": [2, 2],
                 "location": "random bone"
             },
             {
                 "enemy": "snake",
                 "count": "wave 5 / 1 wave 5 % - *",
-                "hp": "100 25 wave * +",
+                "hp": "base 25 wave * +",
                 "location": "random red"
             }, 
             {
                 "enemy": "toad",
                 "count": "0 wave +",
-                "hp": "100 70 wave * +",
+                "hp": "base 70 wave * +",
                 "delay": "10",
                 "damage": "base 50 +",
                 "location": "random bone"
@@ -35,7 +35,7 @@
             {
                 "enemy": "spider",
                 "count": "2 wave *",
-                "hp": "2 wave *",
+                "hp": "base wave * 2 /",
                 "delay": "1",
                 "location": "random"
             }
