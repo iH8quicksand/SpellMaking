@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
 
-    public void TogglePaused()
+    public void TogglePaused() // Escape key calls this (through playercontroller)
     {
         if (GameIsPaused) Resume();
         else Pause();
@@ -15,6 +15,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        ButtonAudioManager.Instance.PlayClick();
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameManager.Instance.state = GameManager.GameState.INWAVE;
@@ -31,6 +32,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
+        ButtonAudioManager.Instance.PlayClick();
         Time.timeScale = 1f;
         GameIsPaused = false;
         SceneManager.LoadScene("MainMenuScene");
@@ -38,6 +40,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Quit()
     {
+        ButtonAudioManager.Instance.PlayClick();
         Application.Quit();
     }
 }

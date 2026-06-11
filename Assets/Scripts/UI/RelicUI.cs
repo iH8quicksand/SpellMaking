@@ -55,6 +55,7 @@ public class RelicUI : MonoBehaviour
 
     public void ToggleDescription()
     {
+        ButtonAudioManager.Instance.PlayClick();
         if (!description.activeSelf) description.SetActive(true);
         else description.SetActive(false);
     }

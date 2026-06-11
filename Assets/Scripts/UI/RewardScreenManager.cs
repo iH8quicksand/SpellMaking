@@ -100,6 +100,7 @@ public class RewardScreenManager : MonoBehaviour
     {
         if (GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.spells.Count < 4)
         {
+            ButtonAudioManager.Instance.PlayClick();
             EventBus.Instance.Broadcast_AddSpell(offeredSpell);
             spellPanel.GetComponent<Image>().color = new Color32(0x1A, 0xFF, 0x00, 0x76);
             getSpellButton.SetActive(false);
@@ -117,9 +118,10 @@ public class RewardScreenManager : MonoBehaviour
 
     public void DEBUG_GetRandomSpell()
     {
-        offeredSpell = GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.GenerateRandomSpell();
         if (GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.spells.Count < 4)
         {
+            ButtonAudioManager.Instance.PlayClick();
+            offeredSpell = GameManager.Instance.player.GetComponent<PlayerController>().spellcaster.GenerateRandomSpell();
             EventBus.Instance.Broadcast_AddSpell(offeredSpell);
         }
     }

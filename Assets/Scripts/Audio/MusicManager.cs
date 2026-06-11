@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 public class MusicManager : MonoBehaviour
 {
     AudioSource player;
-    AudioClip music1;
-    AudioClip music2;
+    AudioClip music_menu;
+    AudioClip music_game;
 
     public static MusicManager Instance { get; private set; }
 
@@ -25,8 +25,8 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         player = GetComponent<AudioSource>();
-        music1 = Resources.Load<AudioClip>("Audio/music1");
-        music2 = Resources.Load<AudioClip>("Audio/music2");
+        music_menu = Resources.Load<AudioClip>("Audio/music_menu");
+        music_game = Resources.Load<AudioClip>("Audio/music_game");
         SceneManager.activeSceneChanged += UpdateClip;
         VolumeManager.Instance.OnVolumeChanged += ChangeVolume;
     }
@@ -36,12 +36,12 @@ public class MusicManager : MonoBehaviour
     {
         if (newScene.name == "Main")
         {
-            player.clip = music2;
+            player.clip = music_game;
             player.Play();
         }
-        else if (player.clip != music1)
+        else if (player.clip != music_menu)
         {
-            player.clip = music1;
+            player.clip = music_menu;
             player.Play();
         }
     }

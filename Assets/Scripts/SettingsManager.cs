@@ -13,6 +13,7 @@ public class SettingsMenu : MonoBehaviour
     // Togglable FullScreen Setting
     public void SetFullScreen(bool isFullScreen)
     {
+        ButtonAudioManager.Instance.PlayClick();
         Screen.fullScreen = isFullScreen;
     }
 }
